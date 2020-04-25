@@ -32,17 +32,15 @@ public class User {
         return id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return lastName + " " +firstName;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
+
 
     public void setLastName(String lastName) {
         this.lastName = lastName;

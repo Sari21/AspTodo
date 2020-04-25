@@ -1,6 +1,7 @@
 package hu.sari.AspTodo.Service;
 
 import hu.sari.AspTodo.Model.Project;
+import hu.sari.AspTodo.Model.ResponseTask;
 import hu.sari.AspTodo.Model.Task;
 import hu.sari.AspTodo.Model.User;
 import hu.sari.AspTodo.Repository.ProjectRepository;
@@ -9,6 +10,8 @@ import hu.sari.AspTodo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,43 +25,67 @@ public class TaskService {
         this.projectRepository = projectRepository;
         this.userRepository = userRepository;
     }
-    public Task addTask(Task t, long projectId, long userId){
-        Project p = this.projectRepository.findById(projectId).get();
-        User u = this.userRepository.findById(userId).get();
-        if(p != null && u != null){
-            t.setProject(p);
-            t.setUser(u);
-            return this.taskRepository.save(t);
+    public ResponseTask addTask(Task t, long projectId, long userId){
+        Optional<Project> p = this.projectRepository.findById(projectId);
+        Optional<User> u = this.userRepository.findById(userId);
+        if(p.isPresent() && u.isPresent()){
+            t.setProject(p.get());
+            t.setUser(u.get());
+            this.taskRepository.save(t);
+            return new ResponseTask(t);
         }
         else return null;
     }
-    public Iterable<Task> findAllTasksByUserId(long userId){
+    public List<ResponseTask> findAllTasksByUserId(long userId){
         Optional<User> u = this.userRepository.findById(userId);
         if(u.isPresent()){
-            return this.taskRepository.findAllByUser(u.get());
+
+            Iterable<Task> it =  this.taskRepository.findAllByUser(u.get());
+            List<ResponseTask> list = new ArrayList<>();
+            ResponseTask rT;
+            for(Task t : it){
+                rT = new ResponseTask(t);
+                list.add(rT);
+            }
+            return list;
         }
         return null;
     }
-    public Iterable<Task> findAllTasksByProjectId(long projectId){
+    public List<ResponseTask> findAllTasksByProjectId(long projectId){
         Optional<Project> p = this.projectRepository.findById(projectId);
         if(p.isPresent()){
-            return this.taskRepository.findAllByProject(p.get());
+            Iterable<Task> it = this.taskRepository.findAllByProject(p.get());
+            List<ResponseTask> list = new ArrayList<>();
+            ResponseTask rT;
+            for(Task t : it) {
+                rT = new ResponseTask(t);
+                list.add(rT);
+            }
+            return list;
         }
         return null;
     }
-    public Iterable<Task> findTasksByProjectIdAndUserId(long projectId, long userId){
+    public List<ResponseTask> findTasksByProjectIdAndUserId(long projectId, long userId){
         Optional<User> u = this.userRepository.findById(userId);
         Optional<Project> p = this.projectRepository.findById(projectId);
         if(u.isPresent() && p.isPresent()){
-        return this.taskRepository.findAllByUserAndProject(u.get(), p.get());
+            Iterable<Task> it = this.taskRepository.findAllByUserAndProject(u.get(), p.get());
+            List<ResponseTask> list = new ArrayList<>();
+            ResponseTask rT;
+            for(Task t : it) {
+                rT = new ResponseTask(t);
+                list.add(rT);
+            }
+            return list;
         }
         return null;
     }
-    public Task updateIsDone(long taskId, boolean isDone){
+    public ResponseTask updateIsDone(long taskId, boolean isDone){
         Optional<Task> t = taskRepository.findById(taskId);
         if(t.isPresent()){
             t.get().setDone(isDone);
-            return taskRepository.save(t.get());
+            taskRepository.save(t.get());
+            return new ResponseTask(t.get());
         }
         else return null;
     }
