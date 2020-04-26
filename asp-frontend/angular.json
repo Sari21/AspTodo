@@ -3,7 +3,7 @@
   "version": 1, 
   "newProjectRoot": "projects",
   "projects": {
-    "AspTodo-frontend": {
+    "asp-frontend": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/AspTodo-frontend",
+            "outputPath": "dist/asp-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "AspTodo-frontend:build"
+            "browserTarget": "asp-frontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "AspTodo-frontend:build:production"
+              "browserTarget": "asp-frontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AspTodo-frontend:build"
+            "browserTarget": "asp-frontend:build"
           }
         },
         "test": {
@@ -110,15 +110,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "AspTodo-frontend:serve"
+            "devServerTarget": "asp-frontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "AspTodo-frontend:serve:production"
+              "devServerTarget": "asp-frontend:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "AspTodo-frontend"
+  "defaultProject": "asp-frontend"
 }

@@ -2,7 +2,7 @@ package hu.sari.AspTodo.Controller;
 
 import hu.sari.AspTodo.Model.ResponseTask;
 import hu.sari.AspTodo.Model.Task;
-import hu.sari.AspTodo.Service.TaskService;
+import hu.sari.AspTodo.security.Service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
