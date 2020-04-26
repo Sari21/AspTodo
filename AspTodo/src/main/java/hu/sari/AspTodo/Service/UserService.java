@@ -29,4 +29,7 @@ public class UserService {
     public void deleteUserById(long id){
         this.userRepository.deleteById(id);
     }
+    public Optional<User> getUserByName(String name){
+        return this.userRepository.findByName(name);
+    }
 }

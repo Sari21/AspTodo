@@ -11,15 +11,14 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String firstName;
-    private String lastName;
+    private String name;
     private String password;
     private Role role;
+    private boolean isActive;
 
 
-    public User(@JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName, @JsonProperty("password") String password, @JsonProperty("role") Role role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User( @JsonProperty("name") String name, @JsonProperty("password") String password, @JsonProperty("role") Role role) {
+        this.name = name;
         this.password = password;
         this.role = role;
 
@@ -33,17 +32,23 @@ public class User {
     }
 
     public String getName() {
-        return lastName + " " +firstName;
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public boolean isActive() {
+        return isActive;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public boolean getActive() {
+        return isActive;
+    }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public String getPassword() {
