@@ -1,8 +1,10 @@
 package hu.sari.AspTodo.Model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
+import java.security.BasicPermission;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,7 @@ public class User {
     private String name;
     private String password;
     private Role role;
+    @Value("${some.key:false}")
     private boolean isActive;
 
 
@@ -21,6 +24,7 @@ public class User {
         this.name = name;
         this.password = password;
         this.role = role;
+        this.isActive = false;
 
     }
 
@@ -41,10 +45,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public boolean getActive() {
-        return isActive;
     }
 
     public void setActive(boolean active) {

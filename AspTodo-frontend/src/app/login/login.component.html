@@ -7,16 +7,16 @@
   </button>
 </div> -->
 
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Login</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div>
+  <div>
+    <p>Login</p>
+  </div>
+  <div>
     <form>
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td>
-            <mat-form-field class="example-full-width">
+            <div class="example-full-width">
               <input
                 matInput
                 placeholder="Username"
@@ -24,12 +24,12 @@
                 name="username"
                 required
               />
-            </mat-form-field>
+            </div>
           </td>
         </tr>
         <tr>
           <td>
-            <mat-form-field class="example-full-width">
+            <div class="example-full-width">
               <input
                 matInput
                 placeholder="Password"
@@ -38,7 +38,7 @@
                 name="password"
                 required
               />
-            </mat-form-field>
+            </div>
           </td>
         </tr>
         <p *ngIf="error" class="error">
@@ -46,11 +46,14 @@
         </p>
       </table>
     </form>
-    <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button (click)="checkLogin()" color="primary">
+    <!-- 
+
+     <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+   -->
+  </div>
+  <div>
+    <button (click)="checkLogin()" color="primary">
       Login
     </button>
-  </mat-card-actions>
-</mat-card>
+  </div>
+</div>

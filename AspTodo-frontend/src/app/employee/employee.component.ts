@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { HttpClientService, Employee } from "../service/httpclient.service";
+import { HttpClientService } from "../service/httpclient.service";
+import { Employee } from "../model/employee";
 
 @Component({
   selector: "app-employee",
@@ -20,6 +21,7 @@ export class EmployeeComponent implements OnInit {
 
   handleSuccessfulResponse(response) {
     this.employees = response;
+    console.log(response);
   }
 
   deleteEmployee(employee: Employee): void {

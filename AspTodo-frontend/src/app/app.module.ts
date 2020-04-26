@@ -10,7 +10,6 @@ import { FormsModule } from "@angular/forms";
 import { HeaderComponent } from "./header/header.component";
 import { LoginComponent } from "./login/login.component";
 import { LogoutComponent } from "./logout/logout.component";
-import { AngularMaterialModule } from "./angular-material.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BasicAuthHtppInterceptorService } from "./service/basic-auth-interceptor.service";
 
@@ -25,7 +24,6 @@ import { BasicAuthHtppInterceptorService } from "./service/basic-auth-intercepto
   ],
   imports: [
     BrowserModule,
-    AngularMaterialModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,

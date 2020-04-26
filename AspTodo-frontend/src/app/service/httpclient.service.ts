@@ -1,15 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-
-export class Employee {
-  constructor(
-    public empId: string,
-    public name: string,
-    public designation: string,
-    public salary: string
-  ) {}
-}
-
+import { Employee } from "../model/employee";
 @Injectable({
   providedIn: "root",
 })
@@ -17,7 +8,7 @@ export class HttpClientService {
   constructor(private httpClient: HttpClient) {}
 
   getEmployees() {
-    return this.httpClient.get<Employee[]>("http://localhost:8080/employees");
+    return this.httpClient.get<Employee[]>("http://localhost:8080/api/user");
   }
 
   public deleteEmployee(employee) {
@@ -28,7 +19,7 @@ export class HttpClientService {
 
   public createEmployee(employee) {
     return this.httpClient.post<Employee>(
-      "http://localhost:8080/employees",
+      "http://localhost:8080/api/user",
       employee
     );
   }

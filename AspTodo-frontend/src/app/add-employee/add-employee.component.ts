@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { HttpClientService, Employee } from "../service/httpclient.service";
+import { HttpClientService } from "../service/httpclient.service";
 import { Router } from "@angular/router";
+import { Employee } from "../model/employee";
 
 @Component({
   selector: "app-add-employee",
@@ -8,7 +9,7 @@ import { Router } from "@angular/router";
   styleUrls: ["./add-employee.component.css"],
 })
 export class AddEmployeeComponent implements OnInit {
-  user: Employee = new Employee("", "", "", "");
+  user: Employee = new Employee();
 
   constructor(
     private httpClientService: HttpClientService,

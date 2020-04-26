@@ -1,43 +1,33 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span
-      ><a
-        mat-button
-        href="https://www.techgeeknext.com"
-        style="font-size: larger;"
-        >TechGeekNext</a
-      ></span
-    >
-    <span class="example-fill-remaining-space"></span>
-    <span class="align-center"></span>
-    <span class="example-spacer"></span>
-    <a
-      mat-button
-      *ngIf="!loginService.isUserLoggedIn()"
-      routerLink="/login"
-      class="nav-link"
-      >Login</a
-    >
-    <a
-      mat-button
-      *ngIf="loginService.isUserLoggedIn()"
-      routerLink="/"
-      class="nav-link"
-      >View Employees</a
-    >
-    <a
-      mat-button
-      *ngIf="loginService.isUserLoggedIn()"
-      routerLink="/addemployee"
-      class="nav-link"
-      >Add New Employee</a
-    >
-    <a
-      mat-button
-      *ngIf="loginService.isUserLoggedIn()"
-      routerLink="/logout"
-      class="nav-link"
-      >LogOut</a
-    >
-  </mat-toolbar-row>
-</mat-toolbar>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">AS Plan</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngIf="!loginService.isUserLoggedIn()">
+        <a class="nav-link" routerLink="/login"
+          >Login <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item" *ngIf="loginService.isUserLoggedIn()">
+        <a class="nav-link" routerLink="/">View Employees</a>
+      </li>
+      <li class="nav-item" *ngIf="loginService.isUserLoggedIn()">
+        <a class="nav-link" routerLink="/addemployee">Add New Employee</a>
+      </li>
+      <li class="nav-item" *ngIf="loginService.isUserLoggedIn()">
+        <a class="nav-link" routerLink="/logout">LogOut</a>
+      </li>
+    </ul>
+  </div>
+</nav>
