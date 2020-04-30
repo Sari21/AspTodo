@@ -1,7 +1,7 @@
 package hu.sari.AspTodo.Controller;
 
 import hu.sari.AspTodo.Model.Project;
-import hu.sari.AspTodo.Service.ProjectService;
+import hu.sari.AspTodo.security.Service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
