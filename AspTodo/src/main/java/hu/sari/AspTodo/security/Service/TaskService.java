@@ -1,4 +1,4 @@
-package hu.sari.AspTodo.Service;
+package hu.sari.AspTodo.security.Service;
 
 import hu.sari.AspTodo.Model.Project;
 import hu.sari.AspTodo.Model.ResponseTask;

@@ -1,9 +1,8 @@
-package hu.sari.AspTodo.Service;
+package hu.sari.AspTodo.security.Service;
 
 import hu.sari.AspTodo.Model.Project;
 import hu.sari.AspTodo.Repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

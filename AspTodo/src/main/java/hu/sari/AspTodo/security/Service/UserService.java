@@ -1,4 +1,4 @@
-package hu.sari.AspTodo.Service;
+package hu.sari.AspTodo.security.Service;
 
 import hu.sari.AspTodo.Model.User;
 import hu.sari.AspTodo.Repository.UserRepository;

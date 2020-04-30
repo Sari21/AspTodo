@@ -1,0 +1,32 @@
+
+<div class="justify-content-center d-flex">
+  <div class="col-10">
+    <h1 class="title">Felhasználók</h1>
+    <div class="justify-content-center d-flex">
+      <table class="col-10 m-5 usertable">
+        <tr>
+          <th class="col-3">Név</th>
+          <th class="col-3">Felhasználónév</th>
+          <th class="col-3">Admin</th>
+          <th class="col-1"></th>
+        </tr>
+        <tr *ngFor="let user of users">
+          <td class="col-3">{{ user.name }}</td>
+          <td class="col-3">{{ user.username }}</td>
+          <td class="col-3">
+            <p *ngFor="let role of user.roles">{{ role.name }}</p>
+          </td>
+          <td style="text-align: center;">
+            <i class="fas fa-pencil-alt fa-lg"></i>
+          </td>
+        </tr>
+    </table>
+    <a routerLink="/signup">
+      új felhasználó felvétele
+    </a>
+    </div>
+  </div>
+</div>
+<a routerLink="/users" class="btn m-2" href="javascript:void(0)" target=""
+  ><span>Mégse</span></a
+>

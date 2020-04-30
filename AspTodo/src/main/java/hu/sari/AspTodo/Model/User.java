@@ -1,5 +1,6 @@
 package hu.sari.AspTodo.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.NaturalId;
 
@@ -41,6 +42,7 @@ public class User{
     private String email;
 
     @NotBlank
+    @JsonIgnore
     @Size(min=6, max = 100)
     private String password;
 
