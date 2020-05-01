@@ -9,6 +9,8 @@ import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ["./users.component.css"],
 })
 export class UsersComponent implements OnInit {
+  title = 'appBootstrap';
+  closeResult: string;
   constructor(user: UserService, private modalService: NgbModal) {
     this.userService = user;
   }
@@ -16,7 +18,6 @@ export class UsersComponent implements OnInit {
   userService: UserService;
   editUser: User;
   editing = false;
-  closeResult = "";
   ngOnInit(): void {
     this.userService.getUsers().subscribe((t) => {
       this.users = t;
@@ -26,5 +27,22 @@ export class UsersComponent implements OnInit {
   edit(user: User) {
     this.editing = true;
     console.log(user);
+  }
+  open(content) {
+    this.modalService.open(content).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
 }

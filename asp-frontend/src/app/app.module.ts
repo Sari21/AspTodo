@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
@@ -29,7 +29,9 @@ import { UsersComponent } from './admin/users/users.component';
     AppRoutingModule, 
     FormsModule, 
     HttpClientModule, 
-    CommonModule],
+    CommonModule,
+    NgbModule
+      ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
