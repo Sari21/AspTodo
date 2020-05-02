@@ -13,4 +13,7 @@ import { User } from "../model/user";
   getUsers(): Observable<User[]> {
     return <Observable<User[]>>this.http.get(this.userUrl);
   }
+  updateUser(user: User){
+    return this.http.put(this.userUrl, user);
+  }
 }
