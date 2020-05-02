@@ -5,7 +5,8 @@ import { User } from "../model/user";
 
 @Injectable({
   providedIn: 'root'
-})export class UserService {
+})
+export class UserService {
   private userUrl = "http://localhost:8080/api/user";
 
   constructor(private http: HttpClient) {}
@@ -15,7 +16,7 @@ import { User } from "../model/user";
   }
   updateUser(user: User){
     var v = {
-      "s"
+      
     }
     return this.http.patch(this.userUrl, user);
   }

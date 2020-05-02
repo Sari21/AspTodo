@@ -10,7 +10,9 @@
       <li *ngIf="authority === 'admin'" class="nav-item">
         <a class="nav-link" routerLink="users">Felhasználók</a>
       </li>
-     
+      <li *ngIf="authority" class="nav-item">
+        <a class="nav-link" routerLink="projects">Projektek</a>
+      </li>
       <li *ngIf="!authority" class="nav-item">
         <a class="nav-link" routerLink="auth/login">Login</a>
       </li>
