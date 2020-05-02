@@ -17,10 +17,10 @@ public class JwtProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
 
-    @Value("${unknown.param:jwt.secret}")
+    @Value("${asp.app.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${unknown.param:100}")
+    @Value("${asp.app.jwtExpiration}")
     private int jwtExpiration;
 
     public String generateJwtToken(Authentication authentication) {

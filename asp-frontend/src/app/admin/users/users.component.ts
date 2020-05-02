@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { UserService } from "../../services/user.service";
 import { User } from "../../model/user";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { Role } from 'src/app/model/role';
 
 @Component({
   selector: "app-users",
@@ -28,8 +29,8 @@ export class UsersComponent implements OnInit {
     console.log(user);
   }
   open(content, id: number) {
-    this.originalUser = this.users.find(t => t.id == id);
-    this.selectedUser = {...this.originalUser};
+    this.selectedUser = this.users.find(t => t.id == id);
+   // this.selectedUser = {...this.originalUser};
     
     
     this.modalService.open(content).result.then((result) => {
@@ -40,16 +41,15 @@ export class UsersComponent implements OnInit {
   }
   submit(){
    
-      if(this.isAdmin){
-        //this.selectedUser.roles = ["ROLE_ADMIN", "ROLE_USER"];
+      if(this.selectedUser.isAdmin){
+        this.selectedUser.roles = [new Role("ROLE_ADMIN"), new Role("ROLE_USER")]
       }
       else{
-       // this.selectedUser.roles =["ROLE_USER"]
+        this.selectedUser.roles = [, new Role("ROLE_USER")]
       }
     
-    var u = this.users.find(t => t.id = this.selectedUser.id) ;
-    u = this.selectedUser;
-    this.userService.updateUser(u);
+    //this.originalUser = this.selectedUser;
+    this.userService.updateUser(this.originalUser);
   }
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
