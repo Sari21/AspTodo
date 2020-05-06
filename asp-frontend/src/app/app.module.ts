@@ -15,6 +15,7 @@ import { httpInterceptorProviders } from "./auth/auth-interceptor";
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { UsersComponent } from './admin/users/users.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { ProjectComponent } from './project/project.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ProjectsComponent } from './projects/projects.component';
     NavBarComponent,
     UsersComponent,
     ProjectsComponent,
+    ProjectComponent,
   ],
   imports: [
     BrowserModule, 

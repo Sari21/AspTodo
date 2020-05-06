@@ -51,6 +51,21 @@ public class TaskService {
         }
         return null;
     }
+    public List<ResponseTask> findAllTasksByUserName(String userName){
+        Optional<User> u = this.userRepository.findByUsername(userName);
+        if(u.isPresent()){
+
+            Iterable<Task> it =  this.taskRepository.findAllByUser(u.get());
+            List<ResponseTask> list = new ArrayList<>();
+            ResponseTask rT;
+            for(Task t : it){
+                rT = new ResponseTask(t);
+                list.add(rT);
+            }
+            return list;
+        }
+        return null;
+    }
     public List<ResponseTask> findAllTasksByProjectId(long projectId){
         Optional<Project> p = this.projectRepository.findById(projectId);
         if(p.isPresent()){
@@ -67,6 +82,21 @@ public class TaskService {
     }
     public List<ResponseTask> findTasksByProjectIdAndUserId(long projectId, long userId){
         Optional<User> u = this.userRepository.findById(userId);
+        Optional<Project> p = this.projectRepository.findById(projectId);
+        if(u.isPresent() && p.isPresent()){
+            Iterable<Task> it = this.taskRepository.findAllByUserAndProject(u.get(), p.get());
+            List<ResponseTask> list = new ArrayList<>();
+            ResponseTask rT;
+            for(Task t : it) {
+                rT = new ResponseTask(t);
+                list.add(rT);
+            }
+            return list;
+        }
+        return null;
+    }
+    public List<ResponseTask> findTasksByProjectIdAndUsername(long projectId, String username){
+        Optional<User> u = this.userRepository.findByUsername(username);
         Optional<Project> p = this.projectRepository.findById(projectId);
         if(u.isPresent() && p.isPresent()){
             Iterable<Task> it = this.taskRepository.findAllByUserAndProject(u.get(), p.get());

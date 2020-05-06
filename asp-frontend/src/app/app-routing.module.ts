@@ -6,11 +6,16 @@ import { LoginComponent } from "./login/login.component";
 import { HomeComponent } from "./home/home.component";
 import { UsersComponent} from "./admin/users/users.component"
 import {ProjectsComponent} from "./projects/projects.component"
+import { ProjectComponent } from './project/project.component';
 
 const routes: Routes = [
   {
     path: "home",
     component: HomeComponent,
+  },
+  {
+    path: "project/:id",
+    component: ProjectComponent,
   },
   {
     path: "projects",

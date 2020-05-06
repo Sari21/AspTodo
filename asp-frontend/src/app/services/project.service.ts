@@ -23,5 +23,8 @@ export class ProjectService {
   deleteProject(id: number){
     return <Observable<Project[]>>this.http.delete(this.userUrl.concat("/project/").concat(id.toString()));
   }
+  getTasksByUserAndProject(username : string, projectId: number){
+    return <Observable<Project[]>>this.http.get(this.userUrl.concat("/task/user/").concat(username).concat("/project/").concat(projectId.toString()));
+  }
  
 }

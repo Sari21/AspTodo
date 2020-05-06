@@ -12,7 +12,7 @@
             <th class="col-1"></th>
           </tr>
           <tr *ngFor="let project of projects">
-            <td class="col-3" style="word-wrap: break-word">{{ project.name }}</td>
+            <td class="col-3" style="word-wrap: break-word"><a href="{{ makeUrl(project.id) }}">{{ project.name }}</a></td>
             <td class="col-3" style="word-wrap: break-word">{{ project.description }}</td>
             <td class="col-3">{{ project.jobNumber }}</td>
             <td style="text-align: center;">

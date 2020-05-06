@@ -104,5 +104,8 @@ editProject(content, project : Project){
   findIndexToUpdate(newItem) { 
         return newItem.id === this;
   }
+  makeUrl(id: number){
+    return "http://localhost:4200/project/".concat(id.toString());
+  }
 }
 
