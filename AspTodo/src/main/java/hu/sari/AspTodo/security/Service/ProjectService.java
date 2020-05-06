@@ -17,8 +17,11 @@ public class ProjectService {
     public Project addProject(Project project){
         return this.projectRepository.save(project);
     }
+    public Project updateProject(Project project){
+        return this.projectRepository.save(project);
+    }
     public Iterable<Project> getAllProjects(){
-        return this.projectRepository.findAll();
+        return this.projectRepository.findAllByOrderByIdDesc();
     }
     public Optional<Project> getProjectById(long id){
         return this.projectRepository.findById(id);

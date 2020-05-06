@@ -3,6 +3,8 @@ package hu.sari.AspTodo.Model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +13,11 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Size(min=3, max = 100)
     private String name;
+    @Size(min=3, max=500)
     private String description;
+    @Column(unique=true)
     private long jobNumber;
 
     public Project() {

@@ -29,6 +29,10 @@ public class ProjectController {
     public Project addProject(@RequestBody Project project){
         return this.projectService.addProject(project);
     }
+    @PutMapping
+    public Project updateProject(@RequestBody Project project){
+        return this.projectService.updateProject(project);
+    }
     @DeleteMapping(path = "{id}")
     public void deleteProjectById(@PathVariable("id") long  id){
         this.projectService.deleteProjectById(id);

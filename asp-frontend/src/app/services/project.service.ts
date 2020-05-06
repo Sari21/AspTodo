@@ -14,8 +14,11 @@ export class ProjectService {
   getProjects(): Observable<Project[]> {
     return <Observable<Project[]>>this.http.get(this.userUrl.concat("/project"));
   }
-  addProject(project:Project): Observable<Project[]> {
-    return <Observable<Project[]>>this.http.post(this.userUrl.concat("/project"), project);
+  addProject(project:Project): Observable<Project> {
+    return <Observable<Project>>this.http.post(this.userUrl.concat("/project"), project);
+  }
+  updateProject(project:Project): Observable<Project> {
+    return <Observable<Project>>this.http.put(this.userUrl.concat("/project"), project);
   }
   deleteProject(id: number){
     return <Observable<Project[]>>this.http.delete(this.userUrl.concat("/project/").concat(id.toString()));
