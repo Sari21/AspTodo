@@ -1,10 +1,14 @@
 package hu.sari.AspTodo.security.Service;
 
 import hu.sari.AspTodo.Model.Project;
+import hu.sari.AspTodo.Model.ResponseProject;
+import hu.sari.AspTodo.Model.Task;
 import hu.sari.AspTodo.Repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,10 +27,31 @@ public class ProjectService {
     public Iterable<Project> getAllProjects(){
         return this.projectRepository.findAllByOrderByIdDesc();
     }
-    public Optional<Project> getProjectById(long id){
-        return this.projectRepository.findById(id);
+    public ResponseProject getProjectById(long id){
+        Optional<Project> p = this.projectRepository.findById(id);
+        if(p.isPresent()){
+            return new ResponseProject(p.get());
+        }
+        return null;
     }
     public void deleteProjectById(long id){
         this.projectRepository.deleteById(id);
+    }
+
+    public ResponseProject getProjectByIdAndUser(long id, String username){
+        Optional<Project> p = this.projectRepository.findById(id);
+        if(p.isPresent()){
+
+        List<Task> filteredTasks = new ArrayList<>();
+        for(Task t : p.get().getTasks()){
+            if(t.getUser().getName().equals(username)){
+                filteredTasks.add(t);
+            }
+        }
+        p.get().setTasks(filteredTasks);
+
+        return new ResponseProject(p.get());
+        }
+        else return null;
     }
 }

@@ -29,13 +29,15 @@ public class TaskService {
         Optional<Project> p = this.projectRepository.findById(projectId);
         Optional<User> u = this.userRepository.findById(userId);
         if(p.isPresent() && u.isPresent()){
-            t.setProject(p.get());
             t.setUser(u.get());
+            p.get().addTask(t);
             this.taskRepository.save(t);
+            this.projectRepository.save(p.get());
             return new ResponseTask(t);
         }
         else return null;
     }
+    /*
     public List<ResponseTask> findAllTasksByUserId(long userId){
         Optional<User> u = this.userRepository.findById(userId);
         if(u.isPresent()){
@@ -51,6 +53,8 @@ public class TaskService {
         }
         return null;
     }
+
+     */
     public List<ResponseTask> findAllTasksByUserName(String userName){
         Optional<User> u = this.userRepository.findByUsername(userName);
         if(u.isPresent()){
@@ -66,7 +70,7 @@ public class TaskService {
         }
         return null;
     }
-    public List<ResponseTask> findAllTasksByProjectId(long projectId){
+  /*  public List<ResponseTask> findAllTasksByProjectId(long projectId){
         Optional<Project> p = this.projectRepository.findById(projectId);
         if(p.isPresent()){
             Iterable<Task> it = this.taskRepository.findAllByProject(p.get());
@@ -80,7 +84,9 @@ public class TaskService {
         }
         return null;
     }
-    public List<ResponseTask> findTasksByProjectIdAndUserId(long projectId, long userId){
+
+   */
+   /* public List<ResponseTask> findTasksByProjectIdAndUserId(long projectId, long userId){
         Optional<User> u = this.userRepository.findById(userId);
         Optional<Project> p = this.projectRepository.findById(projectId);
         if(u.isPresent() && p.isPresent()){
@@ -95,6 +101,9 @@ public class TaskService {
         }
         return null;
     }
+
+    */
+   /*
     public List<ResponseTask> findTasksByProjectIdAndUsername(long projectId, String username){
         Optional<User> u = this.userRepository.findByUsername(username);
         Optional<Project> p = this.projectRepository.findById(projectId);
@@ -110,6 +119,8 @@ public class TaskService {
         }
         return null;
     }
+
+    */
     public ResponseTask updateIsDone(long taskId, boolean isDone){
         Optional<Task> t = taskRepository.findById(taskId);
         if(t.isPresent()){

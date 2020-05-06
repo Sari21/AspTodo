@@ -7,7 +7,6 @@ public class ResponseTask {
     private String title;
     private String description;
     private boolean isDone;
-    private long projectId;
     private long userId;
     private String userName;
     public ResponseTask(Task t){
@@ -15,7 +14,6 @@ public class ResponseTask {
         this.title = t.getTitle();
         this.description = t.getDescription();
         this.isDone = t.isDone();
-        this.projectId = t.getProject().getId();
         this.userId = t.getUser().getId();
         this.userName = t.getUser().getName();
     }
@@ -52,13 +50,7 @@ public class ResponseTask {
         isDone = done;
     }
 
-    public long getProjectId() {
-        return projectId;
-    }
 
-    public void setProjectId(long projectId) {
-        this.projectId = projectId;
-    }
 
     public long getUserId() {
         return userId;

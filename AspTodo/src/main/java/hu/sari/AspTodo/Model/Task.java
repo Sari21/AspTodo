@@ -14,8 +14,6 @@ public class Task {
     private String description;
     private boolean isDone;
     @ManyToOne(cascade = CascadeType.ALL)
-    private Project project;
-    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
     public Task() {
@@ -55,13 +53,6 @@ public class Task {
         isDone = done;
     }
 
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
 
     public User getUser() {
         return user;

@@ -3,7 +3,6 @@ package hu.sari.AspTodo.Model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +18,8 @@ public class Project {
     private String description;
     @Column(unique=true)
     private long jobNumber;
+    @OneToMany
+    private List<Task> tasks ;
 
     public Project() {
 
@@ -29,6 +30,7 @@ public class Project {
         this.name = name;
         this.description = description;
         this.jobNumber = jobNumber;
+        this.tasks = new ArrayList<>();
     }
 
     public long getId() {
@@ -58,5 +60,16 @@ public class Project {
 
     public void setJobNumber(long jobNumber) {
         this.jobNumber = jobNumber;
+    }
+    public void addTask(Task t){
+        this.tasks.add(t);
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }

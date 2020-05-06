@@ -20,15 +20,16 @@ export class ProjectComponent implements OnInit {
     this.route.params.subscribe((params) => {
       let projectId = +params["id"];
       console.log(projectId);
-      //this.getCompany(companyId);
       if (this.tokenStorage.getToken()) {
         var username = this.tokenStorage.getUsername();
-      //this.createCompany = false;
       console.log(username);
       }
-      var v = this.projectService.getTasksByUserAndProject(username, projectId).subscribe(t => console.log(t));
-      
+      //var v = this.projectService.getProjectById( projectId).subscribe(t => console.log(t));
+      var f = this.projectService.getTasksByUserAndProject(username, projectId).subscribe(t => this.project = t);
+      //var v = this.projectService.getProjectByUsername( username).subscribe(t => console.log(t));
     });
   }
+  project : Project;
+  
 
 }

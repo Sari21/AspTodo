@@ -37,7 +37,6 @@ public class TaskSerializer extends StdSerializer<Task> {
         jgen.writeStringField("title", task.getTitle());
         jgen.writeStringField("description", task.getDescription());
         jgen.writeBooleanField("isDone", task.isDone());
-        jgen.writeObjectField("project", task.getProject());
         jgen.writeNumberField("user_id", task.getUser().getId());
         jgen.writeEndObject();
     }
