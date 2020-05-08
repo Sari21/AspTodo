@@ -75,7 +75,13 @@ onSave(){
 
 deleteProject(id: number){
   this.projectService.deleteProject(id).subscribe(
-    t => {this.loadProjects();}
+    t => {
+      var dp = this.projects.find(a => a.id == id);
+      const index = this.projects.indexOf(dp, 0);
+      if (index > -1) {
+        this.projects.splice(index, 1);
+      }
+    } 
   );
 }
 confirmDelete(id: number, name: string) {
@@ -106,6 +112,9 @@ editProject(content, project : Project){
   }
   makeUrl(id: number){
     return "http://localhost:4200/project/".concat(id.toString());
+  }
+  makeUrlAll(id: number){
+    return "http://localhost:4200/projectall/".concat(id.toString());
   }
 }
 

@@ -16,6 +16,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { UsersComponent } from './admin/users/users.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ProjectComponent } from './project/project.component';
+import { FooterComponent } from './footer/footer.component';
+import { ProjectAllTasksComponent } from './project-all-tasks/project-all-tasks.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { ProjectComponent } from './project/project.component';
     UsersComponent,
     ProjectsComponent,
     ProjectComponent,
+    FooterComponent,
+    ProjectAllTasksComponent,
   ],
   imports: [
     BrowserModule, 

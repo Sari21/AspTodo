@@ -7,6 +7,7 @@ import { HomeComponent } from "./home/home.component";
 import { UsersComponent} from "./admin/users/users.component"
 import {ProjectsComponent} from "./projects/projects.component"
 import { ProjectComponent } from './project/project.component';
+import {ProjectAllTasksComponent} from './project-all-tasks/project-all-tasks.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: "project/:id",
     component: ProjectComponent,
+  },
+  {
+    path: "projectall/:id",
+    component: ProjectAllTasksComponent,
   },
   {
     path: "projects",

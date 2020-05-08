@@ -1,7 +1,10 @@
 
 <div class="justify-content-center d-flex">
   <div class="col-10">
-    <h1 class="title">Felhasználók</h1>
+  <h1 class="title">Felhasználók</h1>
+      <button class="btn btn-lg btn-outline-primary" routerLink="/signup">
+        Új felhasználó
+      </button>
     <div class="justify-content-center d-flex">
       <table class="col-10 m-5 usertable">
         <tr>
@@ -16,61 +19,10 @@
           <td class="col-3">
             <p *ngFor="let role of user.roles">{{ role.name }}</p>
           </td>
-          <td style="text-align: center;">
-            <button class="btn btn-lg btn-outline-primary" (click)="open(content, user.id)">Launch demo modal</button>
-          </td>
+         
         </tr>
     </table>
-    <a routerLink="/signup">
-      új felhasználó felvétele
-    </a>
+   
     </div>
   </div>
 </div>
-<a routerLink="/users" class="btn m-2" href="javascript:void(0)" target=""
-  ><span>Mégse</span></a
->
-
-<ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title">Modal title</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>{{selectedUser.name}}</p>
-
-    <label for="name">Név</label>
-    <input
-    id="name"
-    class="form-control"
-    [(ngModel)]="selectedUser.name"
-  />
-      <label for="name">Felhasználónév</label>
-      <input
-      id="username"
-      class="form-control"
-      [(ngModel)]="selectedUser.username"
-    />
-    <label for="admin">Adminisztrátor</label>
-    <input
-    id="admin"
-    type="checkbox"
-    class="form-control"
-    [(ngModel)]="selectedUser.isAdmin"
-    />
-
-  </div>
-  <div class="modal-footer">
-    <button type="submit" class="btn btn-secondary" (click)="submit()">Mentés</button>
-    <button type="cancel" class="btn btn-secondary" (click)="c('Close click')">Mégsem</button>
-  </div>
-  
-</ng-template>
-
-<button class="btn btn-lg btn-outline-primary" (click)="open(content, 1)">Launch demo modal</button>
-
-<hr>
-
-<pre>{{closeResult}}</pre>

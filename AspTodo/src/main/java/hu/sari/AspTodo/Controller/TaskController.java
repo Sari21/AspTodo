@@ -46,13 +46,13 @@ public class TaskController {
     }
 
      */
-    @PostMapping("user/{userId}/project/{projectId}")
-    public ResponseTask addNewTask(@RequestBody Task t, @PathVariable("userId") long userId, @PathVariable("projectId") long projectId){
-        return this.taskService.addTask(t, projectId, userId);
+    @PostMapping("user/{username}/project/{projectId}")
+    public ResponseTask addNewTask(@RequestBody Task t, @PathVariable("username") String username, @PathVariable("projectId") long projectId){
+        return this.taskService.addTask(t, projectId, username);
     }
-    @DeleteMapping(path="{id}")
-    public void deleteTaskById(@PathVariable("id") long id){
-        this.taskService.deleteTaskById(id);
+    @DeleteMapping(path="{taskId}/project/{projectId}")
+    public void deleteTaskById(@PathVariable("taskId") long taskId, @PathVariable("projectId") long projectId){
+        this.taskService.deleteTaskById(taskId, projectId);
     }
     @PatchMapping(path = "{id}")
     public ResponseTask updateTaskIsDone(@PathVariable("id") long id, @RequestBody boolean isDone){
