@@ -78,4 +78,7 @@ public class TaskService {
        this.taskRepository.deleteById(taskId);
        }
     }
+    public void deleteTasksByUser(User user){
+        this.taskRepository.deleteAllByUser(user);
+    }
 }

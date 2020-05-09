@@ -15,15 +15,11 @@ import java.util.*;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final TaskRepository taskRepository;
-    private final ProjectRepository projectRepository;
     @Autowired
-    private  UserService userService;
+    private  TaskService taskService;
     @Autowired
-    public UserService(UserRepository userRepository, TaskRepository taskRepository, ProjectRepository projectRepository){
+    public UserService(UserRepository userRepository){
         this.userRepository = userRepository;
-        this.taskRepository = taskRepository;
-        this.projectRepository = projectRepository;
     }
     public Iterable<User> getUsers(){
         return this.userRepository.findAll();
@@ -38,7 +34,7 @@ public class UserService {
 
         if(newUser.getPassword() == null){
             newUser.setPassword(oldUser.get().getPassword());
-            //newUser.setRoles(oldUser.get().getRoles());
+            newUser.setRoles(oldUser.get().getRoles());
         }
         return this.userRepository.save(newUser);
         }
@@ -51,13 +47,8 @@ public class UserService {
 
         Optional<User> u = this.userRepository.findById(id);
         if(u.isPresent()){
-
-            Iterable<Task> tasks = this.taskRepository.findAllByUser(u.get());
-            for(Task t : tasks){
-                this.projectRepository.findById(t.getProject().getId()).get().getTasks().remove(t);
-                this.taskRepository.delete(t);
-            }
-           this.userRepository.deleteById(id);
+            this.taskService.deleteTasksByUser(u.get());
+            this.userRepository.deleteById(id);
         }
     }
     public List<ResponseUser> getNames(){
