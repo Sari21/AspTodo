@@ -13,3 +13,15 @@ table {
   tr:nth-child(even) {
     background-color: #dddddd;
   }
+  .fas{
+    font-size: 1.5rem;
+    }
+    .fas:hover{
+    color: gray;
+    cursor: pointer;
+  }
+  input[type="checkbox"]{
+    width: 20px; /*Desired width*/
+    height: 20px; /*Desired height*/
+
+  }

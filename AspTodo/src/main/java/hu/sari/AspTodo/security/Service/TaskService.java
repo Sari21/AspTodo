@@ -118,14 +118,22 @@ public class TaskService {
     }
 
     */
-    public ResponseTask updateIsDone(long taskId){
-        Optional<Task> t = taskRepository.findById(taskId);
-        if(t.isPresent()){
-            t.get().setDone(true);
-            taskRepository.save(t.get());
-            return new ResponseTask(t.get());
+    public ResponseTask updateIsDone(long projectId, long taskId){
+        Optional<Project> p = projectRepository.findById(projectId);
+        Task task = null;
+        if(p.isPresent()){
+            for(Task t : p.get().getTasks()){
+                if (t.getId() == taskId){
+                    task = t;
+                    t.setDone(true);
+                    taskRepository.save(t);
+                }
+            }
+            projectRepository.save(p.get());
+        if(task != null)
+            return (new ResponseTask(task));
         }
-        else return null;
+        return null;
     }
     public void deleteTaskById(long taskId, long projectId){
 

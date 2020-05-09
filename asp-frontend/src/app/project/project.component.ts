@@ -27,7 +27,7 @@ export class ProjectComponent implements OnInit {
       
       }
       //var v = this.projectService.getProjectById( projectId).subscribe(t => console.log(t));
-      this.projectService.getTasksByUserAndProject(this.username, this.projectId).subscribe(t => this.project = t);
+      this.projectService.getTasksByUserAndProject(this.username, this.projectId).subscribe(t => (this.project = t, console.log(t)));
       //var v = this.projectService.getProjectByUsername( username).subscribe(t => console.log(t));
     });
   }
@@ -50,7 +50,7 @@ export class ProjectComponent implements OnInit {
    }
    onSave(){
     this.newTask.userName = this.username;
-    this.newTask.isDone = false;
+    this.newTask.done = false;
     this.projectService.addTask(this.newTask,  this.projectId).subscribe( t=>{this.project.tasks.unshift(t)});
     this.newTask = undefined;
     this.modalService.dismissAll();
@@ -84,6 +84,14 @@ export class ProjectComponent implements OnInit {
     }
   }
   setDone(id: number){
-    this.projectService.updateTaskIsDone(id).subscribe();
+    this.projectService.updateTaskIsDone(this.project.id, id).subscribe(data => {
+      this.project.tasks.find(t => t.id == id).done = true;
+    },
+    (error) => {
+      console.log(error);
+    });
+
   }
+  
+
 }

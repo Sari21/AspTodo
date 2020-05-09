@@ -15,10 +15,10 @@ public class ResponseTask {
         this.description = t.getDescription();
         this.isDone = t.isDone();
         this.userId = t.getUser().getId();
-        this.userName = t.getUser().getName();
+        this.userName = t.getUser().getUsername();
     }
     public ResponseTask(){
-        this.isDone = false;
+        
     }
 
     public long getId() {

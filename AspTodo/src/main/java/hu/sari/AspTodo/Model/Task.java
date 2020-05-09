@@ -1,5 +1,6 @@
 package hu.sari.AspTodo.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -22,7 +23,9 @@ public class Task {
     @ManyToOne(cascade = CascadeType.ALL)
     @NotNull
     private User user;
-
+    @JsonIgnore
+    @ManyToOne
+    private Project project;
     public Task() {
     }
     public Task( String title, String description, User user ) {
@@ -67,5 +70,13 @@ public class Task {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

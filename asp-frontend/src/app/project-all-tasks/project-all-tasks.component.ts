@@ -32,10 +32,10 @@ export class ProjectAllTasksComponent implements OnInit {
           this.username = this.tokenStorage.getUsername();
         
         }
-        //var v = this.projectService.getProjectById( projectId).subscribe(t => console.log(t));
+        
         this.projectService.getProjectById( this.projectId).subscribe(t => this.project = t);
         this.userService.getNames().subscribe(t => this.users = t);
-        //var v = this.projectService.getProjectByUsername( username).subscribe(t => console.log(t));
+        
    
       });
     }
@@ -96,6 +96,6 @@ export class ProjectAllTasksComponent implements OnInit {
     dataChanged(){
       this.newTask.userName = this.selected.username;
       this.newTask.userId = this.selected.id;
-      this.newTask.isDone = false;
+      this.newTask.done = false;
     }
   }

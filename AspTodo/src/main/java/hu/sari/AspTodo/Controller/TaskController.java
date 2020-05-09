@@ -55,9 +55,9 @@ public class TaskController {
     public void deleteTaskById(@PathVariable("taskId") long taskId, @PathVariable("projectId") long projectId){
         this.taskService.deleteTaskById(taskId, projectId);
     }
-    @PatchMapping(path = "{id}")
-    public ResponseTask updateTaskIsDone(@PathVariable("id") long id ){
-        return this.taskService.updateIsDone(id);
+    @PatchMapping(path = "project/{projectId}/task/{taskId}")
+    public ResponseTask updateTaskIsDone(@PathVariable("projectId") long projectId, @PathVariable("taskId") long taskId ){
+        return this.taskService.updateIsDone(projectId, taskId);
     }
 
 

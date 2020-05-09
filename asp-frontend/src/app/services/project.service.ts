@@ -39,8 +39,9 @@ export class ProjectService {
   deleteTask(taskId: number, projectId: number){
     return this.http.delete(this.BASE_URL.concat("/task/").concat(taskId.toString()).concat("/project/").concat(projectId.toString()));
   }
-  updateTaskIsDone(id: number):Observable<Task>{
-    return <Observable<Task>>this.http.patch(this.BASE_URL.concat("/task/").concat(id.toString()), null);
+  updateTaskIsDone(projectId: number, taskId: number):Observable<Task>{
+    return <Observable<Task>>this.http.patch(
+      this.BASE_URL.concat("/task/project/").concat(projectId.toString().concat("/task/").concat(taskId.toString())), null);
   }
  
 }
