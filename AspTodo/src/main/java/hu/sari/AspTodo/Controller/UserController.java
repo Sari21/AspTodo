@@ -29,7 +29,7 @@ public class UserController {
     public Optional<User> getUserById(@PathVariable("id") long id){
         return this.userService.getUserById(id);
     }
-    @PutMapping
+    @PatchMapping
     public User updateUser(@RequestBody User user){
         return this.userService.updateUser(user);
     }

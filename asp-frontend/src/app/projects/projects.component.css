@@ -5,13 +5,13 @@ table {
   }
   
   td, th {
-    border: 1px solid #dddddd;
+    border: none;
     text-align: left;
     padding: 8px;
   }
   
   tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #FFCDBC;
   }
   .fas{
   font-size: 1.5rem;
@@ -19,4 +19,11 @@ table {
   .fas:hover{
   color: gray;
   cursor: pointer;
+  }
+  a{
+    text-decoration: none;
+    color: black;
+  }
+  a:hover{
+    color: #FF4B41;
   }

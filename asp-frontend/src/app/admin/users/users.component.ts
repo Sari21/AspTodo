@@ -49,7 +49,8 @@ export class UsersComponent implements OnInit {
       }
     
     //this.originalUser = this.selectedUser;
-    this.userService.updateUser(this.originalUser);
+    this.userService.updateUser(this.selectedUser).subscribe((error)=>
+    console.log(error));
   }
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -79,5 +80,29 @@ export class UsersComponent implements OnInit {
     });
   });
 }
+close(){
+  this.modalService.dismissAll();
 
+  }
+  confirmDelete(id: number, name: string) {
+    if(confirm("Biztos hogy törlöd a(z) "+ name + "felhasználót?")) {
+      this.delete(id);
+    }
+  }
+delete(id: number){
+   this.userService.deleteUser(id).subscribe((data)=>{
+    var du = this.users.find(a => a.id == id);
+    const index = this.users.indexOf(du, 0);
+    if (index > -1) {
+      this.users.splice(index, 1);
+    }
+   },
+   (error) => {
+    console.log(error);
+    
+   }
+   
+   );
+  }
 }
+

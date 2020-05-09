@@ -1,48 +1,46 @@
-<div *ngIf="isSignedUp; else signupForm">
-  Your registration is successful. Please login!
-</div>
 
-<ng-template #signupForm>
-  <div class="row col-sm-6" style="max-width:350px;">
-    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+  <div class="col-sm-6 justify-content-center  " >
+    <div>
+      <h1 class="mb-5 mt-5">Új felhasználó felvétele</h1>
+    </div>
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate class="mb-5 mt-5">
       <div class="form-group">
-        <label for="name">Your name</label>
-        <input type="text" class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel" required />
+        <label for="name">Név</label>
+        <input  type="text" class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel" required />
         <div *ngIf="f.submitted && name.invalid">
-          <div *ngIf="name.errors.required">Name is required</div>
+          <div *ngIf="name.errors.required">Add meg a nevet</div>
         </div>
       </div>
       <div class="form-group">
-        <label for="username">Username</label>
+        <label for="username">Felhasználónév</label>
         <input type="text" class="form-control" name="username" [(ngModel)]="form.username" #username="ngModel"
           required />
         <div *ngIf="f.submitted && username.invalid">
-          <div *ngIf="username.errors.required">Username is required</div>
+          <div *ngIf="username.errors.required">Add meg a felhasználónevet</div>
         </div>
       </div>
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email">E-mail cím</label>
         <input type="text" class="form-control" name="email" [(ngModel)]="form.email" #email="ngModel" required email />
         <div *ngIf="f.submitted && email.invalid">
-          <div *ngIf="email.errors.required">Email is required</div>
-          <div *ngIf="email.errors.email">Email must be a valid email address</div>
+          <div *ngIf="email.errors.required">Add meg az e-mail címet</div>
+          <div *ngIf="email.errors.email">Valós e-mail címet adj meg</div>
         </div>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password">Jelszó</label>
         <input type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel"
           required minlength="6" />
         <div *ngIf="f.submitted && password.invalid">
-          <div *ngIf="password.errors.required">Password is required</div>
-          <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+          <div *ngIf="password.errors.required">Add meg a jelszót</div>
+          <div *ngIf="password.errors.minlength">A jelszónak minimum 6 karakternek kell lennie</div>
         </div>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary">Register</button>
+        <button class="brk-btn">Mentés</button>
         <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
-          Signup failed!<br/>{{errorMessage}}
+          Nem sikerült a regisztráció<br/>{{errorMessage}}
         </div>
       </div>
     </form>
   </div>
-</ng-template>

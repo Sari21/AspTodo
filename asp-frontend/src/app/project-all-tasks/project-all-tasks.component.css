@@ -1,27 +1,35 @@
 table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-  .fas{
-    font-size: 1.5rem;
-    }
-  .fas:hover{
-  color: gray;
-  cursor: pointer;
-  }
-  input[type="checkbox"]{
-    width: 20px; /*Desired width*/
-    height: 20px; /*Desired height*/
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
 
-  }
+td, th {
+  border: none;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #FFCDBC;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+a:hover{
+  color: #FF4B41;
+}
+.fas{
+font-size: 1.5rem;
+}
+.fas:hover{
+color: gray;
+cursor: pointer;
+}
+input[type="checkbox"]{
+width: 20px; /*Desired width*/
+height: 20px; /*Desired height*/
+
+}

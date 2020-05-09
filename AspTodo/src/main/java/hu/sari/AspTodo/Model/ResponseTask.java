@@ -18,7 +18,7 @@ public class ResponseTask {
         this.userName = t.getUser().getUsername();
     }
     public ResponseTask(){
-        
+
     }
 
     public long getId() {

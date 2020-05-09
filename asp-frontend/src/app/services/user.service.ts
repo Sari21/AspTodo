@@ -23,4 +23,7 @@ export class UserService {
   getNames():Observable<User[]>{
     return <Observable<User[]>>this.http.get(this.BASE_URL.concat("/names"));
   }
+  deleteUser(id: number){
+    return this.http.delete(this.BASE_URL.concat("/").concat(id.toString()));
+  }
 }

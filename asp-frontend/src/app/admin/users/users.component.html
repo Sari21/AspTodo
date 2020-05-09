@@ -1,12 +1,16 @@
 
 <div class="justify-content-center d-flex">
   <div class="col-10">
-  <h1 class="title">Felhasználók</h1>
-      <button class="btn btn-lg btn-outline-primary" routerLink="/signup">
+    <div class="justify-content-center d-flex">
+  <h1 class="mt-5 mb-5">Felhasználók</h1>
+    </div>
+  <div class="justify-content-end d-flex">
+      <button class="brk-btn" routerLink="/signup">
         Új felhasználó
       </button>
+      </div>
     <div class="justify-content-center d-flex">
-      <table class="col-10 m-5 usertable">
+      <table class="col-12 m-5">
         <tr>
           <th class="col-3">Név</th>
           <th class="col-3">Felhasználónév</th>
@@ -19,6 +23,8 @@
           <td class="col-3">
             <p *ngFor="let role of user.roles">{{ role.name }}</p>
           </td>
+          <td class="col-3" (click)="open(content, user.id)">szerkeszt </td>
+          <td class="col-3" (click)="confirmDelete(user.id, user.name)">kuka </td>
          
         </tr>
     </table>
@@ -26,3 +32,44 @@
     </div>
   </div>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Felhasználó</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+      <label for="name">Név</label>
+      <textarea
+      required
+      id="name"
+      class="form-control"
+      [(ngModel)]="selectedUser.name"
+    >
+    </textarea>
+  
+    <label for="username">Felhasználónév</label>
+    <input
+    required
+    id="username"
+    type="text"
+    class="form-control"
+    [(ngModel)]="selectedUser.username"
+    />
+    <label for="admin">Admin?</label>
+    <input 
+    type="checkbox" 
+    id="admin" 
+    name="admin" 
+    [checked]="selectedUser.isAdmin" 
+   >
+
+
+  <div class="modal-footer">
+    <button type="submit" class="brk-btn" (click)="submit()" >Mentés</button>
+    <button type="cancel" class="brk-btn" (click)="close()">Mégsem</button>
+  </div>
+  
+</ng-template>

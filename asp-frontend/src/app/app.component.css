@@ -11,5 +11,8 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 1rem;            /* Footer height */
+    height: 1rem; 
+
+      background-color: #E9B9A9;
+       /* Footer height */
   }
