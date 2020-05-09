@@ -18,35 +18,12 @@ public class TaskController {
     public TaskController(TaskService taskService){
         this.taskService = taskService;
     }
-   /* @GetMapping("user/{userId}")
-    public List<ResponseTask> getTasksByUserId(@PathVariable("userId") long userId){
-        return this.taskService.findAllTasksByUserId(userId);
-    }
 
-    */
     @GetMapping("username/{userName}")
     public List<ResponseTask> getTasksByUserName(@PathVariable("userName") String userName){
         return this.taskService.findAllTasksByUserName(userName);
     }
-  /*  @GetMapping("project/{projectId}")
-    public List<ResponseTask> getTasksByProjectId(@PathVariable("projectId") long projectId){
-        return this.taskService.findAllTasksByProjectId(projectId);
-    }
 
-   */
-    /*@GetMapping("user/{userId}/project/{projectId}")
-    public List<ResponseTask> getTasksByProjectId(@PathVariable("userId") long userId, @PathVariable("projectId") long projectId){
-        return this.taskService.findTasksByProjectIdAndUserId(projectId, userId);
-    }
-
-     */
-    /*
-    @GetMapping("user/{username}/project/{projectId}")
-    public List<ResponseTask> getTasksByProjectIdAndUsername(@PathVariable("username") String username, @PathVariable("projectId") long projectId){
-        return this.taskService.findTasksByProjectIdAndUsername(projectId, username);
-    }
-
-     */
     @PostMapping("project/{projectId}")
     public ResponseTask addNewTask(@RequestBody ResponseTask t,  @PathVariable("projectId") long projectId){
         return this.taskService.addTask(t, projectId);

@@ -15,11 +15,10 @@ import java.util.Optional;
 @Service
 public class ProjectService {
     private final ProjectRepository projectRepository;
-    private final TaskRepository taskRepository;
+
     @Autowired
-    public ProjectService(ProjectRepository projectRepository, TaskRepository taskRepository){
+    public ProjectService(ProjectRepository projectRepository){
         this.projectRepository = projectRepository;
-        this.taskRepository = taskRepository;
     }
     public Project addProject(Project project){
         return this.projectRepository.save(project);
