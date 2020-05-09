@@ -27,7 +27,7 @@ public class Project {
     private String description;
     @NotNull
     private long jobNumber;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,  orphanRemoval=true)
     private List<Task> tasks ;
 
     public Project() {

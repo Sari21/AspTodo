@@ -45,6 +45,9 @@ public class User{
 
     @Size(min=6, max = 100)
     private String password;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true)
+    @JsonIgnore
+    private List<Task> tasks;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -59,15 +62,16 @@ public class User{
         this.username = username;
         this.email = email;
         this.password = password;
+        this.tasks = new ArrayList<>();
     }
 
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
+
 
     public String getUsername() {
         return username;
@@ -107,5 +111,13 @@ public class User{
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }

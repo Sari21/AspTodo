@@ -4,6 +4,7 @@ import hu.sari.AspTodo.Model.Project;
 import hu.sari.AspTodo.Model.ResponseProject;
 import hu.sari.AspTodo.Model.Task;
 import hu.sari.AspTodo.Repository.ProjectRepository;
+import hu.sari.AspTodo.Repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,11 @@ import java.util.Optional;
 @Service
 public class ProjectService {
     private final ProjectRepository projectRepository;
+    private final TaskRepository taskRepository;
     @Autowired
-    public ProjectService(ProjectRepository projectRepository){
+    public ProjectService(ProjectRepository projectRepository, TaskRepository taskRepository){
         this.projectRepository = projectRepository;
+        this.taskRepository = taskRepository;
     }
     public Project addProject(Project project){
         return this.projectRepository.save(project);

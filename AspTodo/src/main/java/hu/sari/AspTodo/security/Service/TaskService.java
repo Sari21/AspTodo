@@ -26,7 +26,7 @@ public class TaskService {
         Optional<Project> p = this.projectRepository.findById(projectId);
         Optional<User> u = this.userRepository.findByUsername(t.getUserName());
         if(p.isPresent() && u.isPresent()){
-            Task newTask = new Task(t.getTitle(), t.getDescription(), u.get());
+            Task newTask = new Task(t.getTitle(), t.getDescription(), u.get(), p.get());
             p.get().addTask(newTask);
             this.taskRepository.save(newTask);
             this.projectRepository.save(p.get());

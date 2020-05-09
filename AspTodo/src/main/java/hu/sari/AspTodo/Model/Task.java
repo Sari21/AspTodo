@@ -2,6 +2,7 @@ package hu.sari.AspTodo.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.Cascade;
 
 
 import javax.persistence.*;
@@ -20,19 +21,23 @@ public class Task {
     @Size(max = 500)
     private String description;
     private boolean isDone;
-    @ManyToOne(cascade = CascadeType.ALL)
+
     @NotNull
+    @ManyToOne(fetch=FetchType.EAGER)
+
     private User user;
+    @ManyToOne(fetch=FetchType.EAGER)
     @JsonIgnore
-    @ManyToOne
     private Project project;
+
     public Task() {
     }
-    public Task( String title, String description, User user ) {
+    public Task( String title, String description, User user, Project project ) {
         this.description = description;
         this.title = title;
         this.user = user;
         this.isDone = false;
+       this.project=project;
     }
 
     public long getId() {
