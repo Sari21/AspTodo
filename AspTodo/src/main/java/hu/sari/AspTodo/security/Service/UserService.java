@@ -1,11 +1,7 @@
 package hu.sari.AspTodo.security.Service;
 
-import hu.sari.AspTodo.Model.Project;
 import hu.sari.AspTodo.Model.ResponseUser;
-import hu.sari.AspTodo.Model.Task;
 import hu.sari.AspTodo.Model.User;
-import hu.sari.AspTodo.Repository.ProjectRepository;
-import hu.sari.AspTodo.Repository.TaskRepository;
 import hu.sari.AspTodo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,5 +54,10 @@ public class UserService {
             list.add(new ResponseUser(u));
             }
             return list;
-        }
+    }
+    public Optional<User> findUserByUsername(String username){
+        return this.userRepository.findByUsername(username);
+    }
+
+
 }

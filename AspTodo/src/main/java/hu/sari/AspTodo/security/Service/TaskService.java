@@ -14,31 +14,32 @@ import java.util.Optional;
 @Service
 public class TaskService {
     private final TaskRepository taskRepository;
-    private final ProjectRepository projectRepository;
-    private final UserRepository userRepository;
+
     @Autowired
-    public TaskService(TaskRepository taskRepository, ProjectRepository projectRepository, UserRepository userRepository){
+    private ProjectService projectService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    public TaskService(TaskRepository taskRepository){
         this.taskRepository  = taskRepository;
-        this.projectRepository = projectRepository;
-        this.userRepository = userRepository;
+
     }
     public ResponseTask addTask(ResponseTask t, long projectId){
-        Optional<Project> p = this.projectRepository.findById(projectId);
-        Optional<User> u = this.userRepository.findByUsername(t.getUserName());
+        Optional<Project> p = this.projectService.findById(projectId);
+        Optional<User> u = this.userService.findUserByUsername(t.getUserName());
         if(p.isPresent() && u.isPresent()){
             Task newTask = new Task(t.getTitle(), t.getDescription(), u.get(), p.get());
             p.get().addTask(newTask);
             this.taskRepository.save(newTask);
-            this.projectRepository.save(p.get());
+            this.projectService.updateProject(p.get());
             return new ResponseTask(newTask);
         }
         else return null;
     }
 
     public List<ResponseTask> findAllTasksByUserName(String userName){
-        Optional<User> u = this.userRepository.findByUsername(userName);
+        Optional<User> u = this.userService.findUserByUsername(userName);
         if(u.isPresent()){
-
             Iterable<Task> it =  this.taskRepository.findAllByUserOrderByIdDesc(u.get());
             List<ResponseTask> list = new ArrayList<>();
             ResponseTask rT;
@@ -52,7 +53,7 @@ public class TaskService {
     }
 
     public ResponseTask updateIsDone(long projectId, long taskId){
-        Optional<Project> p = projectRepository.findById(projectId);
+        Optional<Project> p = projectService.findById(projectId);
         Task task = null;
         if(p.isPresent()){
             for(Task t : p.get().getTasks()){
@@ -62,7 +63,7 @@ public class TaskService {
                     taskRepository.save(t);
                 }
             }
-            projectRepository.save(p.get());
+            projectService.updateProject(p.get());
         if(task != null)
             return (new ResponseTask(task));
         }
@@ -71,14 +72,18 @@ public class TaskService {
     public void deleteTaskById(long taskId, long projectId){
 
        Optional<Task> t =this.taskRepository.findById(taskId);
-       Optional<Project> p = this.projectRepository.findById(projectId);
+       Optional<Project> p = this.projectService.findById(projectId);
        if(t.isPresent() && p.isPresent()){
        p.get().getTasks().remove(t.get());
-       this.projectRepository.save(p.get());
+       this.projectService.updateProject(p.get());
        this.taskRepository.deleteById(taskId);
        }
     }
     public void deleteTasksByUser(User user){
-        this.taskRepository.deleteAllByUser(user);
+        if(user != null)
+        this.projectService.deleteTasksFromProjectByUser(user);
+    }
+    public void deleteAll(List<Task> delete){
+        this.taskRepository.deleteAll(delete);
     }
 }

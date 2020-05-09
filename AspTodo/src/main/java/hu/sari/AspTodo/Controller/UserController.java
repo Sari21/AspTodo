@@ -5,6 +5,7 @@ import hu.sari.AspTodo.Model.User;
 import hu.sari.AspTodo.security.Service.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -34,6 +35,7 @@ public class UserController {
         return this.userService.updateUser(user);
     }
     @DeleteMapping (path = "{id}")
+    @Transactional
     public void deleteUserById(@PathVariable("id") long id){
         this.userService.deleteUserById(id);
     }
