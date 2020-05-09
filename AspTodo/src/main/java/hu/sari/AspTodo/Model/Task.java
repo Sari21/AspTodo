@@ -4,24 +4,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @NotNull
+    @Size(max = 100)
     private String title;
+    @NotNull
+    @Size(max = 500)
     private String description;
     private boolean isDone;
     @ManyToOne(cascade = CascadeType.ALL)
+    @NotNull
     private User user;
 
     public Task() {
     }
-    public Task(@JsonProperty("description")String description, @JsonProperty("title")String title) {
+    public Task( String title, String description, User user ) {
         this.description = description;
         this.title = title;
-
+        this.user = user;
         this.isDone = false;
     }
 

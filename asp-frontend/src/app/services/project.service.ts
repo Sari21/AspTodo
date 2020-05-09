@@ -33,11 +33,14 @@ export class ProjectService {
   getProjectByUsername(username :string)  :Observable<Task>{
     return <Observable<Task>>this.http.get(this.BASE_URL.concat("/task/username/").concat(username));
   }
-  addTask(task: Task, username: string, projectId: number): Observable<Task> {
-    return <Observable<Task>>this.http.post(this.BASE_URL.concat("/task/user/").concat(username).concat("/project/").concat(projectId.toString()), task);
+  addTask(task: Task, projectId: number): Observable<Task> {
+    return <Observable<Task>>this.http.post(this.BASE_URL.concat("/task/project/").concat(projectId.toString()), task);
   }
   deleteTask(taskId: number, projectId: number){
     return this.http.delete(this.BASE_URL.concat("/task/").concat(taskId.toString()).concat("/project/").concat(projectId.toString()));
+  }
+  updateTaskIsDone(id: number):Observable<Task>{
+    return <Observable<Task>>this.http.patch(this.BASE_URL.concat("/task/").concat(id.toString()), null);
   }
  
 }

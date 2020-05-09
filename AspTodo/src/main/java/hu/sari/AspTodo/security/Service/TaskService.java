@@ -1,9 +1,6 @@
 package hu.sari.AspTodo.security.Service;
 
-import hu.sari.AspTodo.Model.Project;
-import hu.sari.AspTodo.Model.ResponseTask;
-import hu.sari.AspTodo.Model.Task;
-import hu.sari.AspTodo.Model.User;
+import hu.sari.AspTodo.Model.*;
 import hu.sari.AspTodo.Repository.ProjectRepository;
 import hu.sari.AspTodo.Repository.TaskRepository;
 import hu.sari.AspTodo.Repository.UserRepository;
@@ -25,15 +22,15 @@ public class TaskService {
         this.projectRepository = projectRepository;
         this.userRepository = userRepository;
     }
-    public ResponseTask addTask(Task t, long projectId, String username){
+    public ResponseTask addTask(ResponseTask t, long projectId){
         Optional<Project> p = this.projectRepository.findById(projectId);
-        Optional<User> u = this.userRepository.findByUsername(username);
+        Optional<User> u = this.userRepository.findByUsername(t.getUserName());
         if(p.isPresent() && u.isPresent()){
-            t.setUser(u.get());
-            p.get().addTask(t);
-            this.taskRepository.save(t);
+            Task newTask = new Task(t.getTitle(), t.getDescription(), u.get());
+            p.get().addTask(newTask);
+            this.taskRepository.save(newTask);
             this.projectRepository.save(p.get());
-            return new ResponseTask(t);
+            return new ResponseTask(newTask);
         }
         else return null;
     }
@@ -121,10 +118,10 @@ public class TaskService {
     }
 
     */
-    public ResponseTask updateIsDone(long taskId, boolean isDone){
+    public ResponseTask updateIsDone(long taskId){
         Optional<Task> t = taskRepository.findById(taskId);
         if(t.isPresent()){
-            t.get().setDone(isDone);
+            t.get().setDone(true);
             taskRepository.save(t.get());
             return new ResponseTask(t.get());
         }

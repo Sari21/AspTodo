@@ -17,6 +17,9 @@ public class ResponseTask {
         this.userId = t.getUser().getId();
         this.userName = t.getUser().getName();
     }
+    public ResponseTask(){
+        this.isDone = false;
+    }
 
     public long getId() {
         return id;

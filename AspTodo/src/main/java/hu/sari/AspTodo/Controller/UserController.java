@@ -1,9 +1,12 @@
 package hu.sari.AspTodo.Controller;
 
+import hu.sari.AspTodo.Model.ResponseUser;
 import hu.sari.AspTodo.Model.User;
 import hu.sari.AspTodo.security.Service.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -30,8 +33,12 @@ public class UserController {
     public User updateUser(@RequestBody User user){
         return this.userService.updateUser(user);
     }
-    @DeleteMapping ("{id}")
+    @DeleteMapping (path = "{id}")
     public void deleteUserById(@PathVariable("id") long id){
         this.userService.deleteUserById(id);
+    }
+    @GetMapping("names")
+    public List<ResponseUser> getNames(){
+        return this.userService.getNames();
     }
 }

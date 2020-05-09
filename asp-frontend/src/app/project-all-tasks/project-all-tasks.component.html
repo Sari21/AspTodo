@@ -15,7 +15,7 @@
           <tr *ngFor="let task of project.tasks">
             <td class="col-3" style="word-wrap: break-word">{{ task.title }}</td>
             <td class="col-3" style="word-wrap: break-word">{{ task.description }}</td>
-            <td class="col-3"><input type="checkbox" id="isDone" name="isDone" value="task.isDone"></td>
+            <td class="col-3"><input type="checkbox" id="isDone" name="isDone" value="task.isDone" ></td>
             <td style="text-align: center;">
               <button class="btn btn-lg btn-outline-primary" (click)="confirmDelete(task.id)">X</button> 
             </td>
@@ -28,7 +28,7 @@
     
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-      <h4 class="modal-title">Modal title</h4>
+      <h4 class="modal-title">Cím</h4>
       <button type="button" class="close" aria-label="Close" (click)="close()">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -41,14 +41,21 @@
       class="form-control"
       [(ngModel)]="newTask.title"
     />
-        <label for="description">Leírás</label>
-        <textarea
-        required
-        id="description"
-        class="form-control"
-        [(ngModel)]="newTask.description"
-      >
-      </textarea>
+      <label for="description">Leírás</label>
+      <textarea
+      required
+      id="description"
+      class="form-control"
+      [(ngModel)]="newTask.description"
+    >
+    </textarea> 
+    <label for="user">Kinek a feladata?</label>
+    <select [(ngModel)]="selected" required  (change)="dataChanged()">
+   
+      <option *ngFor="let item of users" [ngValue]="item">
+        {{ item.name }}
+      </option>
+    </select>
     
     
     </div>

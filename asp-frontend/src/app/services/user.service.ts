@@ -7,17 +7,20 @@ import { User } from "../model/user";
   providedIn: 'root'
 })
 export class UserService {
-  private userUrl = "http://localhost:8080/api/user";
+  private BASE_URL = "http://localhost:8080/api/user";
 
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User[]> {
-    return <Observable<User[]>>this.http.get(this.userUrl);
+    return <Observable<User[]>>this.http.get(this.BASE_URL);
   }
   updateUser(user: User){
     var v = {
       
     }
-    return this.http.patch(this.userUrl, user);
+    return this.http.patch(this.BASE_URL, user);
+  }
+  getNames():Observable<User[]>{
+    return <Observable<User[]>>this.http.get(this.BASE_URL.concat("/names"));
   }
 }

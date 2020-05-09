@@ -7,13 +7,13 @@
         <table class="col-10 m-5 usertable">
           <tr>
             <th class="col-3">Név</th>
+            <th class="col-3" *ngIf="authority == 'admin'">Összes feladat</th>
             <th class="col-3">Leírás</th>
             <th class="col-3">Munkaszám</th>
-            <th class="col-1"></th>
           </tr>
           <tr *ngFor="let project of projects">
             <td class="col-3" style="word-wrap: break-word"><a href="{{ makeUrl(project.id) }}">{{ project.name }}</a></td>
-            <td class="col-3" style="word-wrap: break-word"><a href="{{ makeUrlAll(project.id) }}">{{ project.name }}</a></td>
+            <td class="col-3" style="word-wrap: break-word" *ngIf="authority == 'admin'"><a href="{{ makeUrlAll(project.id) }}">{{ project.name }}</a></td>
             <td class="col-3" style="word-wrap: break-word">{{ project.description }}</td>
             <td class="col-3">{{ project.jobNumber }}</td>
             <td style="text-align: center;">

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
@@ -46,17 +47,18 @@ public class TaskController {
     }
 
      */
-    @PostMapping("user/{username}/project/{projectId}")
-    public ResponseTask addNewTask(@RequestBody Task t, @PathVariable("username") String username, @PathVariable("projectId") long projectId){
-        return this.taskService.addTask(t, projectId, username);
+    @PostMapping("project/{projectId}")
+    public ResponseTask addNewTask(@RequestBody ResponseTask t,  @PathVariable("projectId") long projectId){
+        return this.taskService.addTask(t, projectId);
     }
     @DeleteMapping(path="{taskId}/project/{projectId}")
     public void deleteTaskById(@PathVariable("taskId") long taskId, @PathVariable("projectId") long projectId){
         this.taskService.deleteTaskById(taskId, projectId);
     }
     @PatchMapping(path = "{id}")
-    public ResponseTask updateTaskIsDone(@PathVariable("id") long id, @RequestBody boolean isDone){
-        return this.taskService.updateIsDone(id, isDone);
+    public ResponseTask updateTaskIsDone(@PathVariable("id") long id ){
+        return this.taskService.updateIsDone(id);
     }
+
 
 }

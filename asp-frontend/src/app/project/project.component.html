@@ -15,7 +15,7 @@
           <tr *ngFor="let task of project.tasks">
             <td class="col-3" style="word-wrap: break-word">{{ task.title }}</td>
             <td class="col-3" style="word-wrap: break-word">{{ task.description }}</td>
-            <td class="col-3"><input type="checkbox" id="isDone" name="isDone" value="task.isDone"></td>
+            <td class="col-3"><input type="checkbox" id="isDone" name="isDone" value="task.isDone" (click)="setDone(task.id)"></td>
             <td style="text-align: center;">
               <button class="btn btn-lg btn-outline-primary" (click)="confirmDelete(task.id)">X</button> 
             </td>

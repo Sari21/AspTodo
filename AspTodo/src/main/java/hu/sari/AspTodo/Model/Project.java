@@ -3,20 +3,29 @@ package hu.sari.AspTodo.Model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
+
+@Table(name = "project", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+                "jobNumber"
+        }),
+})
 
 @Entity
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Size(min=3, max = 100)
+    @NotNull
+    @Size(max = 100)
     private String name;
-    @Size(min=3, max=500)
+    @Size(max=1000)
+    @NotNull
     private String description;
-    @Column(unique=true)
+    @NotNull
     private long jobNumber;
     @OneToMany
     private List<Task> tasks ;

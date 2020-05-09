@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵALLOW_MULTIPLE_PLATFORMS } from '@angular/core';
 import {ProjectService} from '../services/project.service';
+import {UserService} from "../services/user.service"
 import {Project} from '../model/project'
 import { ActivatedRoute } from "@angular/router";
 import { TokenStorageService } from "../auth/token-storage.service";
 import { Task } from '../model/Task';
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { User } from '../model/user';
 
 
 @Component({
@@ -18,8 +20,11 @@ export class ProjectAllTasksComponent implements OnInit {
       private route: ActivatedRoute,
       private tokenStorage: TokenStorageService,
       projectService : ProjectService,
-      private modalService: NgbModal) {this.projectService = projectService}
+      userService: UserService,
+      private modalService: NgbModal) 
+      {this.projectService = projectService, this.userService = userService}
       projectService:ProjectService;
+      userService:UserService;
     ngOnInit(): void {
       this.route.params.subscribe((params) => {
         this.projectId = +params["id"];
@@ -29,14 +34,19 @@ export class ProjectAllTasksComponent implements OnInit {
         }
         //var v = this.projectService.getProjectById( projectId).subscribe(t => console.log(t));
         this.projectService.getProjectById( this.projectId).subscribe(t => this.project = t);
+        this.userService.getNames().subscribe(t => this.users = t);
         //var v = this.projectService.getProjectByUsername( username).subscribe(t => console.log(t));
+   
       });
     }
     project : Project;
     newTask: Task;
-    closeResult;
-    username;
-    projectId;
+    closeResult: string;
+    username: string;
+    projectId: number;
+    selected: User;
+    users: User[];
+    
     
     addTask(content) {
       // this.selectedUser = {...this.originalUser};
@@ -51,8 +61,8 @@ export class ProjectAllTasksComponent implements OnInit {
      }
      onSave(){
      
-      this.projectService.addTask(this.newTask, this.username, this.projectId).subscribe( t=>{this.project.tasks.unshift(t)});
-      this.newTask = undefined;
+      this.projectService.addTask(this.newTask, this.projectId).subscribe( t=>{this.project.tasks.unshift(t)});
+
       this.modalService.dismissAll();
     }
     close(){
@@ -82,5 +92,10 @@ export class ProjectAllTasksComponent implements OnInit {
       if(confirm("Biztos hogy törlöd a feladatot?")) {
         this.deleteTask(id);
       }
+    }
+    dataChanged(){
+      this.newTask.userName = this.selected.username;
+      this.newTask.userId = this.selected.id;
+      this.newTask.isDone = false;
     }
   }

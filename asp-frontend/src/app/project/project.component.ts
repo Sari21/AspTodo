@@ -49,8 +49,9 @@ export class ProjectComponent implements OnInit {
      });
    }
    onSave(){
-   
-    this.projectService.addTask(this.newTask, this.username, this.projectId).subscribe( t=>{this.project.tasks.unshift(t)});
+    this.newTask.userName = this.username;
+    this.newTask.isDone = false;
+    this.projectService.addTask(this.newTask,  this.projectId).subscribe( t=>{this.project.tasks.unshift(t)});
     this.newTask = undefined;
     this.modalService.dismissAll();
   }
@@ -81,5 +82,8 @@ export class ProjectComponent implements OnInit {
     if(confirm("Biztos hogy törlöd a feladatot?")) {
       this.deleteTask(id);
     }
+  }
+  setDone(id: number){
+    this.projectService.updateTaskIsDone(id).subscribe();
   }
 }

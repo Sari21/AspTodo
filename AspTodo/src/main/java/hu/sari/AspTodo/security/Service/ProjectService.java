@@ -44,7 +44,7 @@ public class ProjectService {
 
         List<Task> filteredTasks = new ArrayList<>();
         for(Task t : p.get().getTasks()){
-            if(t.getUser().getName().equals(username)){
+            if(t.getUser().getUsername().equals(username)){
                 filteredTasks.add(0, t);
             }
         }

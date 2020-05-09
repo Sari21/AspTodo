@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ProjectService} from '../services/project.service';
 import {Project} from '../model/project'
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { TokenStorageService } from "../auth/token-storage.service";
 
 @Component({
   selector: 'app-projects',
@@ -10,11 +11,12 @@ import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 })
 export class ProjectsComponent implements OnInit {
 
-  constructor(projectService : ProjectService, private modalService: NgbModal)
+  constructor(    private tokenStorage: TokenStorageService, projectService : ProjectService, private modalService: NgbModal)
    { this.projectService = projectService}
 
   ngOnInit(): void {
     this.loadProjects();
+    this.checkAuth();
   }
   projectService: ProjectService;
   projects : Project[];
@@ -24,6 +26,9 @@ export class ProjectsComponent implements OnInit {
   closeResult;
   edit=false;
   new=false;
+  public roles: string[];
+  public authority: string;
+  public admin: string;
   loadProjects(){
     this.projectService.getProjects().subscribe((t) => {
       this.projects = t;
@@ -115,6 +120,20 @@ editProject(content, project : Project){
   }
   makeUrlAll(id: number){
     return "http://localhost:4200/projectall/".concat(id.toString());
+  }
+  checkAuth() {
+    this.authority = undefined;
+    if (this.tokenStorage.getToken()) {
+      this.roles = this.tokenStorage.getAuthorities();
+      this.roles.every((role) => {
+        if (role === "ROLE_ADMIN") {
+          this.authority = "admin";
+          return false;
+        }
+        this.authority = "user";
+        return true;
+      });
+    }
   }
 }
 
