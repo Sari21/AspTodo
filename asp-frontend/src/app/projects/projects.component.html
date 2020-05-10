@@ -1,75 +1,87 @@
 <div class="justify-content-center d-flex">
-    <div class="col-10">
-      <div class="justify-content-center d-flex">
-        <h1 class="mt-5 mb-5">Projektek</h1>
-      </div>
-      <div class="justify-content-end d-flex">
-        <button class="brk-btn" (click)="addProject(content)">Új projekt</button>
-      </div>
-      <div class="justify-content-center d-flex">
-        <table class="col-12 m-5 usertable">
-          <tr>
-            <th class="col-3">Név</th>
-            <th class="col-3" *ngIf="authority == 'admin'">Összes feladat</th>
-            <th class="col-3">Leírás</th>
-            <th class="col-3">Munkaszám</th>
-          </tr>
-          <tr *ngFor="let project of projects">
-            <td class="col-3" style="word-wrap: break-word"><a href="{{ makeUrl(project.id) }}">{{ project.name }}</a></td>
-            <td class="col-3" style="word-wrap: break-word" *ngIf="authority == 'admin'"><a href="{{ makeUrlAll(project.id) }}">{{ project.name }}</a></td>
-            <td class="col-3" style="word-wrap: break-word">{{ project.description }}</td>
-            <td class="col-3">{{ project.jobNumber }}</td>
-            <td style="text-align: center;">
-              <i class="fas fa-trash-alt" (click)="confirmDelete(project.id, project.name)"></i>
-            </td>
-            <td style="text-align: center;">
-              <i class="fas fa-pencil-alt"  (click)="editProject(content, project)"></i>
-            </td>
-          </tr>
-      </table>
-      </div>
+  <div class="col-10">
+    <div class="justify-content-center d-flex">
+      <h1 class="mt-5 mb-5">Projektek</h1>
     </div>
+    <div class="justify-content-end d-flex">
+      <button class="brk-btn" (click)="addProject(content)">Új projekt</button>
+    </div>
+    <div class="justify-content-center d-flex">
+      <table class="col-12 m-5 usertable">
+        <tr>
+          <th class="col-3">Név</th>
+          <th class="col-3" *ngIf="authority == 'admin'">Összes feladat</th>
+          <th class="col-3">Leírás</th>
+          <th class="col-3">Munkaszám</th>
+        </tr>
+        <tr *ngFor="let project of projects">
+          <td class="col-3" style="word-wrap: break-word;">
+            <a href="{{ makeUrl(project.id) }}">{{ project.name }}</a>
+          </td>
+          <td
+            class="col-3"
+            style="word-wrap: break-word;"
+            *ngIf="authority == 'admin'"
+          >
+            <a href="{{ makeUrlAll(project.id) }}">{{ project.name }}</a>
+          </td>
+          <td class="col-3" style="word-wrap: break-word;">
+            {{ project.description }}
+          </td>
+          <td class="col-3">{{ project.jobNumber }}</td>
+          <td style="text-align: center;">
+            <i
+              class="fas fa-trash-alt"
+              (click)="confirmDelete(project.id, project.name)"
+            ></i>
+          </td>
+          <td style="text-align: center;">
+            <i
+              class="fas fa-pencil-alt"
+              (click)="editProject(content, project)"
+            ></i>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>
 
-    
 <ng-template #content let-c="close" let-d="dismiss">
-    <div class="modal-header">
-      <h4 class="modal-title">Projekt</h4>
-      <button type="button" class="close" aria-label="Close" (click)="close()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <label for="name">Név</label>
-      <input
+  <div class="modal-header">
+    <h4 class="modal-title">Projekt</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <label for="name">Név</label>
+    <input
       required
       id="name"
       class="form-control"
       [(ngModel)]="newProject.name"
     />
-        <label for="description">Leírás</label>
-        <textarea
-        required
-        id="description"
-        class="form-control"
-        [(ngModel)]="newProject.description"
-      >
-      </textarea>
-    
-      <label for="jobNum">Munkaszám</label>
-      <input
+    <label for="description">Leírás</label>
+    <textarea
+      required
+      id="description"
+      class="form-control"
+      [(ngModel)]="newProject.description"
+    >
+    </textarea>
+
+    <label for="jobNum">Munkaszám</label>
+    <input
       required
       id="jobNum"
       type="number"
       class="form-control"
       [(ngModel)]="newProject.jobNumber"
-      />
-  
-    </div>
-    <div class="modal-footer">
-      <button type="submit" class="brk-btn" (click)="onSave()" >Mentés</button>
-      <button type="cancel" class="brk-btn" (click)="close()">Mégsem</button>
-    </div>
-    
-  </ng-template>
-  
+    />
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="brk-btn" (click)="onSave()">Mentés</button>
+    <button type="cancel" class="brk-btn" (click)="close()">Mégsem</button>
+  </div>
+</ng-template>

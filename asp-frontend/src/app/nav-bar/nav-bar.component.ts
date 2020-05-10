@@ -16,6 +16,7 @@ export class NavBarComponent implements OnInit {
   ) {
     console.log(this.router.url);
     this.page = this.router.url;
+    this.checkAuth();
   }
 
   public roles: string[];
