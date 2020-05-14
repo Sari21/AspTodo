@@ -67,9 +67,6 @@ onSave(){
       this.newProject = undefined;
     }); 
   }
- 
-  
-
 }
 
   close(){

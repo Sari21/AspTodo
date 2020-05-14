@@ -15,7 +15,6 @@ export class UserService {
     return <Observable<User[]>>this.http.get(this.BASE_URL);
   }
   updateUser(user: User){
-    console.log(user);
     return this.http.patch(this.BASE_URL, user);
   }
   getNames():Observable<User[]>{
