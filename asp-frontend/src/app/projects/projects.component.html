@@ -31,16 +31,17 @@
           <td class="col-3">{{ project.jobNumber }}</td>
           <td style="text-align: center;">
             <i
-              class="fas fa-trash-alt"
-              (click)="confirmDelete(project.id, project.name)"
+              class="fas fa-pencil-alt m-3"
+              (click)="editProject(content, project)"
             ></i>
           </td>
           <td style="text-align: center;">
             <i
-              class="fas fa-pencil-alt"
-              (click)="editProject(content, project)"
+              class="fas fa-trash-alt m-3"
+              (click)="confirmDelete(project.id, project.name)"
             ></i>
           </td>
+          
         </tr>
       </table>
     </div>
@@ -57,6 +58,7 @@
   <div class="modal-body">
     <label for="name">Név</label>
     <input
+      type="text"
       required
       id="name"
       class="form-control"
@@ -64,6 +66,7 @@
     />
     <label for="description">Leírás</label>
     <textarea
+      type="text"
       required
       id="description"
       class="form-control"
@@ -78,10 +81,15 @@
       type="number"
       class="form-control"
       [(ngModel)]="newProject.jobNumber"
+      min="0"
+      step="1"
     />
   </div>
   <div class="modal-footer">
     <button type="submit" class="brk-btn" (click)="onSave()">Mentés</button>
     <button type="cancel" class="brk-btn" (click)="close()">Mégsem</button>
+    <div [hidden]="!failed" class="alert alert-danger mt-3">
+      {{ errorMessage }}
+    </div>
   </div>
 </ng-template>

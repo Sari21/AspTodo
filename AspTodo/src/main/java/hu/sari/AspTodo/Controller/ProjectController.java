@@ -6,6 +6,7 @@ import hu.sari.AspTodo.Model.ResponseTask;
 import hu.sari.AspTodo.security.Service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -32,6 +33,7 @@ public class ProjectController {
         return ResponseEntity.ok(new ResponseProject(project.get()));
         }
         else{
+            
             return ResponseEntity.notFound().build();
         }
     }
@@ -47,8 +49,8 @@ public class ProjectController {
     public Project addProject(@RequestBody Project project){
         return this.projectService.addProject(project);
     }
-    @PutMapping
-    public Project updateProject(@RequestBody Project project){
+    @PatchMapping
+    public Project updateProject(@Validated @RequestBody Project project){
         return this.projectService.updateProject(project);
     }
     @DeleteMapping(path = "{id}")

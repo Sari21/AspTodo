@@ -36,6 +36,8 @@ export class ProjectComponent implements OnInit {
   closeResult;
   username;
   projectId;
+  failed = false;
+  errorMessage = 'Nem sikerült hozzáadni a feladatot';
   
   addTask(content) {
     // this.selectedUser = {...this.originalUser};
@@ -51,13 +53,15 @@ export class ProjectComponent implements OnInit {
    onSave(){
     this.newTask.userName = this.username;
     this.newTask.done = false;
-    this.projectService.addTask(this.newTask,  this.projectId).subscribe( t=>{this.project.tasks.unshift(t)});
-    this.newTask = undefined;
-    this.modalService.dismissAll();
+    this.projectService.addTask(this.newTask,  this.projectId).subscribe(
+       (data)=>{this.project.tasks.unshift(data), this.close()},
+       (error) => {this.failed = true;});
+   
   }
   close(){
     this.modalService.dismissAll();
     this.newTask = undefined;
+    this.failed = false;
   }
    private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {

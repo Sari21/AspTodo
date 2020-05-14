@@ -21,6 +21,8 @@ export class UsersComponent implements OnInit {
   originalUser: User;
   editing = false;
   isAdmin: boolean;
+  failed = false;
+  errorMessage = 'Nem sikerült módosítani a felhasználót';
   ngOnInit(): void {
     this.loadUsers();
   }
@@ -29,17 +31,12 @@ export class UsersComponent implements OnInit {
     console.log(user);
   }
   open(content, id: number) {
+    this.failed = false;
     this.selectedUser = this.users.find((t) => t.id == id);
-    // this.selectedUser = {...this.originalUser};
+     this.originalUser = {...this.selectedUser};
 
-    this.modalService.open(content).result.then(
-      (result) => {
-        this.closeResult = `Closed with: ${result}`;
-      },
-      (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      }
-    );
+    this.modalService.open(content);
+
   }
   submit() {
     if (this.selectedUser.isAdmin) {
@@ -51,7 +48,15 @@ export class UsersComponent implements OnInit {
     //this.originalUser = this.selectedUser;
     this.userService
       .updateUser(this.selectedUser)
-      .subscribe((error) => console.log(error));
+      .subscribe((data) =>{},
+      (error) => {console.log(error),
+        this.failed = true;
+        var mu = this.users.find((a) => a.id == this.selectedUser.id);
+        const index = this.users.indexOf(mu, 0);
+        if (index > -1) {
+          this.users[index] = this.originalUser;
+        }
+     });
   }
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -79,6 +84,7 @@ export class UsersComponent implements OnInit {
   }
   close() {
     this.modalService.dismissAll();
+    this.failed = false;
   }
   confirmDelete(id: number, name: string) {
     if (confirm("Biztos hogy törlöd a(z) " + name + "felhasználót?")) {

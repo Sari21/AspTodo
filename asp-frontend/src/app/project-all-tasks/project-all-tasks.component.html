@@ -19,9 +19,9 @@
             <td class="col-3" style="word-wrap: break-word">{{ task.title }}</td>
             <td class="col-3" style="word-wrap: break-word">{{ task.description }}</td>
             <td class="col-3" style="word-wrap: break-word">{{ task.userName }}</td>
-            <td class="col-1" style="text-align: center;"><input type="checkbox" id="isDone" name="isDone" [checked]="task.done" [disabled]="true" ></td>
+            <td class="col-1" style="text-align: center;"><input class="m-3"  type="checkbox" id="isDone" name="isDone" [checked]="task.done" [disabled]="true" ></td>
             <td style="text-align: center;" class="col-1">
-              <i class="fas fa-trash-alt" (click)="confirmDelete(task.id)"></i>
+              <i class="fas fa-trash-alt m-3" (click)="confirmDelete(task.id)"></i>
             </td>
           </tr>
       </table>

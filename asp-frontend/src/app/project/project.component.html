@@ -4,7 +4,7 @@
       <h1 class="mb-5 mt-5">{{project.name}} feladatai:</h1>
       </div>
       <div class="justify-content-end d-flex">
-      <button class="brk-btn" (click)="addTask(content)">Új projekt</button> 
+      <button class="brk-btn" (click)="addTask(content)">Új feladat</button> 
         </div>
       <div class="justify-content-center d-flex">
         <table class="col-10 m-5 usertable">
@@ -18,7 +18,7 @@
             <td class="col-3" style="word-wrap: break-word">{{ task.description }}</td>
             <td class="col-1" style="text-align: center;"><input type="checkbox" id="isDone" name="isDone" [checked]="task.done" [disabled]="task.done" (click)="setDone(task.id)"></td>
             <td style="text-align: center;" class="col-1">
-              <i class="fas fa-trash-alt" (click)="confirmDelete(task.id)"></i>
+              <i class="fas fa-trash-alt p-3" (click)="confirmDelete(task.id)"></i>
             </td>
           </tr>
       </table>
@@ -29,7 +29,7 @@
     
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-      <h4 class="modal-title">Modal title</h4>
+      <h4 class="modal-title">Feladat</h4>
       <button type="button" class="close" aria-label="Close" (click)="close()">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -38,12 +38,14 @@
       <label for="name">Cím</label>
       <input
       required
+      type="text"
       id="name"
       class="form-control"
       [(ngModel)]="newTask.title"
     />
         <label for="description">Leírás</label>
         <textarea
+        type="text"
         required
         id="description"
         class="form-control"
@@ -56,6 +58,9 @@
     <div class="modal-footer">
       <button type="submit" class="brk-btn" (click)="onSave()" >Mentés</button>
       <button type="cancel" class="brk-btn" (click)="close()">Mégsem</button>
+      <div [hidden]="!failed" class="alert alert-danger mt-3">
+        {{ errorMessage }}
+      </div>
     </div>
     
   </ng-template>

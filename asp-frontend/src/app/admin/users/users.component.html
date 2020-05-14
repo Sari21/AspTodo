@@ -24,9 +24,11 @@
           <td class="col-3">
             <p *ngFor="let role of user.roles">{{ role.name }}</p>
           </td>
-          <td class="col-3" (click)="open(content, user.id)"><i class="fas fa-edit p-2"></i></td>
-          <td class="col-3" (click)="confirmDelete(user.id, user.name)">
-            <i class="fas fa-trash p-2"></i>
+          <td class="col-3 " (click)="open(content, user.id)">
+            <i  class="fas fa-pencil-alt m-3"></i>
+          </td>
+          <td class="col-3 " (click)="confirmDelete(user.id, user.name)">
+            <i class="fas fa-trash-alt m-3"></i>
           </td>
         </tr>
       </table>
@@ -41,15 +43,14 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-
   <label for="name">Név</label>
-  <textarea
+  <input
     required
     id="name"
+    type="text"
     class="form-control"
     [(ngModel)]="selectedUser.name"
-  >
-  </textarea>
+  />
 
   <label for="username">Felhasználónév</label>
   <input
@@ -59,14 +60,7 @@
     class="form-control"
     [(ngModel)]="selectedUser.username"
   />
-  <label for="email">Email</label>
-  <input
-    required
-    id="email"
-    type="text"
-    class="form-control"
-    [(ngModel)]="selectedUser.email"
-  />
+  
   <label for="admin">Admin?</label>
   <input
     type="checkbox"
@@ -79,5 +73,8 @@
   <div class="modal-footer">
     <button type="submit" class="brk-btn" (click)="submit()">Mentés</button>
     <button type="cancel" class="brk-btn" (click)="close()">Mégsem</button>
+    <div [hidden]="!failed" class="alert alert-danger mt-3">
+      {{ errorMessage }}
+    </div>
   </div>
 </ng-template>

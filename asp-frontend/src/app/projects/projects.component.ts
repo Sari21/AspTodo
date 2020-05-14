@@ -29,6 +29,8 @@ export class ProjectsComponent implements OnInit {
   public roles: string[];
   public authority: string;
   public admin: string;
+  failed = false;
+  errorMessage = '';
   loadProjects(){
     this.projectService.getProjects().subscribe((t) => {
       this.projects = t;
@@ -37,36 +39,37 @@ export class ProjectsComponent implements OnInit {
 addProject(content) {
  this.new = true;
  // this.selectedUser = {...this.originalUser};
-  
+  this.failed= false;
   this.newProject = new Project();
-  this.modalService.open(content).result.then((result) => {
-    this.closeResult = `Closed with: ${result}`;
-    
-  }, (reason) => {
-    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-  });
+  this.modalService.open(content);
 }
-private getDismissReason(reason: any): string {
-  if (reason === ModalDismissReasons.ESC) {
-    return 'by pressing ESC';
-  } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-    return 'by clicking on a backdrop';
-  } else {
-    return  `with: ${reason}`;
-  }
-}
+
 onSave(){
   if(this.new){
-    this.projectService.addProject(this.newProject).subscribe( t=>{this.projects.unshift(t)});
-    this.new = false;
+    this.projectService.addProject(this.newProject).subscribe( 
+      (data)=>{this.projects.unshift(data);
+        this.new = false;
+        this.close();
+        this.newProject = undefined;
+      },
+      (error) => {
+        this.errorMessage= "Nem sikerült hozzáadni a projektet";
+        this.failed = true;
+      }
+      );
   }
   if(this.edit){
   
-    this.projectService.updateProject(this.newProject).subscribe( t => this.showUpdatedItem(t));
-    this.edit = false;
+    this.projectService.updateProject(this.newProject).subscribe( data => {
+      this.showUpdatedItem(data);
+      this.edit = false;
+      this.close();
+      this.newProject = undefined;
+    }); 
   }
-  this.newProject = undefined;
-  this.modalService.dismissAll();
+ 
+  
+
 }
 
   close(){
@@ -76,6 +79,7 @@ onSave(){
 
   this.edit = false;
   this.new = false;
+  this.failed = false;
   }
 
 deleteProject(id: number){
@@ -98,12 +102,8 @@ editProject(content, project : Project){
     this.edit = true;
     this.newProject = {...project};
      
-     this.modalService.open(content).result.then((result) => {
-       this.closeResult = `Closed with: ${result}`;
-     }, (reason) => {
-       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-     });
-   }
+     this.modalService.open(content);
+}
 
    showUpdatedItem(newItem){
     let updateItem = this.projects.find(this.findIndexToUpdate, newItem.id);
@@ -134,6 +134,8 @@ editProject(content, project : Project){
         return true;
       });
     }
+    
   }
+ 
 }
 

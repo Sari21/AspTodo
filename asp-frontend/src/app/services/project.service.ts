@@ -19,7 +19,7 @@ export class ProjectService {
     return <Observable<Project>>this.http.post(this.BASE_URL.concat("/project"), project);
   }
   updateProject(project:Project): Observable<Project> {
-    return <Observable<Project>>this.http.put(this.BASE_URL.concat("/project"), project);
+    return <Observable<Project>>this.http.patch(this.BASE_URL.concat("/project"), project);
   }
   deleteProject(id: number){
     return <Observable<Project[]>>this.http.delete(this.BASE_URL.concat("/project/").concat(id.toString()));
