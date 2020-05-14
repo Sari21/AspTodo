@@ -1,16 +1,13 @@
 package hu.sari.AspTodo.security.Service;
 
 import hu.sari.AspTodo.Model.Project;
-import hu.sari.AspTodo.Model.ResponseProject;
 import hu.sari.AspTodo.Model.Task;
 import hu.sari.AspTodo.Model.User;
 import hu.sari.AspTodo.Repository.ProjectRepository;
-import hu.sari.AspTodo.Repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,12 +29,9 @@ public class ProjectService {
     public Iterable<Project> getAllProjects(){
         return this.projectRepository.findAllByOrderByIdDesc();
     }
-    public ResponseProject getProjectById(long id){
+    public Optional<Project> getProjectById(long id){
         Optional<Project> p = this.projectRepository.findById(id);
-        if(p.isPresent()){
-            return new ResponseProject(p.get());
-        }
-        return null;
+        return p;
     }
     public Optional<Project>findById(long id){
         return this.projectRepository.findById(id);
@@ -46,7 +40,7 @@ public class ProjectService {
         this.projectRepository.deleteById(id);
     }
 
-    public ResponseProject getProjectByIdAndUser(long id, String username){
+    public Optional<Project> getProjectByIdAndUser(long id, String username){
         Optional<Project> p = this.projectRepository.findById(id);
         if(p.isPresent()){
 
@@ -58,9 +52,9 @@ public class ProjectService {
         }
         p.get().setTasks(filteredTasks);
 
-        return new ResponseProject(p.get());
         }
-        else return null;
+        return p;
+
     }
     public void deleteTasksFromProjectByUser(User u){
         ArrayList<Task> delete = new ArrayList<>();

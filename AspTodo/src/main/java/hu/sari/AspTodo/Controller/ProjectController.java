@@ -5,6 +5,7 @@ import hu.sari.AspTodo.Model.ResponseProject;
 import hu.sari.AspTodo.Model.ResponseTask;
 import hu.sari.AspTodo.security.Service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -20,16 +21,27 @@ public class ProjectController {
     }
 
     @GetMapping
-    public Iterable<Project> getAllProjects(){
-        return this.projectService.getAllProjects();
+    public ResponseEntity<Iterable<Project>> getAllProjects(){
+
+        return ResponseEntity.ok(this.projectService.getAllProjects());
     }
     @GetMapping(path = "{id}")
-    public ResponseProject getProjectById(@PathVariable("id") long id){
-        return this.projectService.getProjectById(id);
+    public ResponseEntity<ResponseProject> getProjectById(@PathVariable("id") long id){
+        Optional<Project> project = this.projectService.getProjectById(id);
+        if(project.isPresent()){
+        return ResponseEntity.ok(new ResponseProject(project.get()));
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
     }
     @GetMapping("user/{username}/project/{projectId}")
-    public ResponseProject getTasksByProjectId(@PathVariable("username") String username, @PathVariable("projectId") long projectId){
-        return this.projectService.getProjectByIdAndUser(projectId, username);
+    public ResponseEntity<ResponseProject> getTasksByProjectId(@PathVariable("username") String username, @PathVariable("projectId") long projectId){
+        Optional<Project> project =  this.projectService.getProjectByIdAndUser(projectId, username);
+        if(project.isPresent()){
+            return ResponseEntity.ok(new ResponseProject(project.get()));
+        }
+        return ResponseEntity.notFound().build();
     }
     @PostMapping
     public Project addProject(@RequestBody Project project){

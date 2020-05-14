@@ -4,6 +4,8 @@ import hu.sari.AspTodo.Model.ResponseTask;
 import hu.sari.AspTodo.Model.Task;
 import hu.sari.AspTodo.security.Service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +27,14 @@ public class TaskController {
     }
 
     @PostMapping("project/{projectId}")
-    public ResponseTask addNewTask(@RequestBody ResponseTask t,  @PathVariable("projectId") long projectId){
-        return this.taskService.addTask(t, projectId);
+    public ResponseEntity<ResponseTask> addNewTask(@RequestBody ResponseTask t, @PathVariable("projectId") long projectId){
+        ResponseTask rT = this.taskService.addTask(t, projectId);
+        if(rT == null){
+            return ResponseEntity.badRequest().build();
+        }
+        else{
+            return new ResponseEntity<ResponseTask>(rT, HttpStatus.CREATED);
+        }
     }
     @DeleteMapping(path="{taskId}/project/{projectId}")
     public void deleteTaskById(@PathVariable("taskId") long taskId, @PathVariable("projectId") long projectId){
