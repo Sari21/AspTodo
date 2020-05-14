@@ -14,7 +14,7 @@
           <th class="col-3">Név</th>
           <th class="col-3">Felhasználónév</th>
           <th class="col-3">E-mail</th>
-          <th class="col-3">Admin</th>
+          <th class="col-3">Jogosultságok</th>
           <th class="col-1"></th>
         </tr>
         <tr *ngFor="let user of users">
@@ -24,9 +24,9 @@
           <td class="col-3">
             <p *ngFor="let role of user.roles">{{ role.name }}</p>
           </td>
-          <td class="col-3" (click)="open(content, user.id)">szerkeszt</td>
+          <td class="col-3" (click)="open(content, user.id)"><i class="fas fa-edit p-2"></i></td>
           <td class="col-3" (click)="confirmDelete(user.id, user.name)">
-            kuka
+            <i class="fas fa-trash p-2"></i>
           </td>
         </tr>
       </table>
@@ -73,6 +73,7 @@
     id="admin"
     name="admin"
     [checked]="selectedUser.isAdmin"
+    [(ngModel)]="selectedUser.isAdmin"
   />
 
   <div class="modal-footer">

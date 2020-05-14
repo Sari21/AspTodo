@@ -120,4 +120,8 @@ public class User{
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
+
+    public void clearRoles(){
+        this.roles.clear();
+    }
 }

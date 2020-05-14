@@ -7,5 +7,6 @@ export class User {
     password: string;
     roles: Role[];
     isAdmin: boolean;  
+    constructor(){}
   }
   

@@ -45,7 +45,7 @@ export class UsersComponent implements OnInit {
     if (this.selectedUser.isAdmin) {
       this.selectedUser.roles = [new Role("ROLE_ADMIN"), new Role("ROLE_USER")];
     } else {
-      this.selectedUser.roles = [, new Role("ROLE_USER")];
+      this.selectedUser.roles = [new Role("ROLE_USER")];
     }
 
     //this.originalUser = this.selectedUser;
@@ -72,10 +72,8 @@ export class UsersComponent implements OnInit {
           console.log(role);
           if (role.name === "ROLE_ADMIN") {
             u.isAdmin = true;
-            console.log(role);
           }
         });
-        console.log(u.isAdmin);
       });
     });
   }
