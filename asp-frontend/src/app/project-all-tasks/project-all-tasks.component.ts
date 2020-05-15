@@ -5,7 +5,7 @@ import {Project} from '../model/project'
 import { ActivatedRoute } from "@angular/router";
 import { TokenStorageService } from "../auth/token-storage.service";
 import { Task } from '../model/Task';
-import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { User } from '../model/user';
 
 
@@ -52,12 +52,7 @@ export class ProjectAllTasksComponent implements OnInit {
       // this.selectedUser = {...this.originalUser};
        
        this.newTask = new Task();
-       this.modalService.open(content).result.then((result) => {
-         this.closeResult = `Closed with: ${result}`;
-         
-       }, (reason) => {
-         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-       });
+       this.modalService.open(content);
      }
      onSave(){
      
@@ -69,15 +64,7 @@ export class ProjectAllTasksComponent implements OnInit {
       this.modalService.dismissAll();
       this.newTask = undefined;
     }
-     private getDismissReason(reason: any): string {
-      if (reason === ModalDismissReasons.ESC) {
-        return 'by pressing ESC';
-      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-        return 'by clicking on a backdrop';
-      } else {
-        return  `with: ${reason}`;
-      }
-    }
+    
     deleteTask(taskId: number){
       this.projectService.deleteTask(taskId, this.project.id).subscribe(
         t => {

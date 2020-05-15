@@ -4,7 +4,7 @@ import {Project} from '../model/project'
 import { ActivatedRoute } from "@angular/router";
 import { TokenStorageService } from "../auth/token-storage.service";
 import { Task } from '../model/Task';
-import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-project',
@@ -26,9 +26,9 @@ export class ProjectComponent implements OnInit {
         this.username = this.tokenStorage.getUsername();
       
       }
-      //var v = this.projectService.getProjectById( projectId).subscribe(t => console.log(t));
-      this.projectService.getTasksByUserAndProject(this.username, this.projectId).subscribe(t => (this.project = t, console.log(t)));
-      //var v = this.projectService.getProjectByUsername( username).subscribe(t => console.log(t));
+      this.projectService.getTasksByUserAndProject(this.username, this.projectId).subscribe
+      (t => (this.project = t, console.log(t)));
+ 
     });
   }
   project : Project;
@@ -40,15 +40,9 @@ export class ProjectComponent implements OnInit {
   errorMessage = 'Nem sikerült hozzáadni a feladatot';
   
   addTask(content) {
-    // this.selectedUser = {...this.originalUser};
-     
      this.newTask = new Task();
-     this.modalService.open(content).result.then((result) => {
-       this.closeResult = `Closed with: ${result}`;
-       
-     }, (reason) => {
-       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-     });
+     this.modalService.open(content);
+ 
    }
    onSave(){
     this.newTask.userName = this.username;
@@ -63,15 +57,7 @@ export class ProjectComponent implements OnInit {
     this.newTask = undefined;
     this.failed = false;
   }
-   private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
-  }
+   
   deleteTask(taskId: number){
     this.projectService.deleteTask(taskId, this.project.id).subscribe(
       t => {

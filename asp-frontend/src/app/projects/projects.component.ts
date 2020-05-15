@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProjectService} from '../services/project.service';
 import {Project} from '../model/project'
-import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TokenStorageService } from "../auth/token-storage.service";
 
 @Component({
