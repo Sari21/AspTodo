@@ -47,24 +47,24 @@ export class ProjectAllTasksComponent implements OnInit {
     selected: User;
     users: User[];
     
-    
-    addTask(content) {
-      // this.selectedUser = {...this.originalUser};
-       
+    //új feladat hozzáadása
+    addTask(content) {       
        this.newTask = new Task();
        this.modalService.open(content);
      }
+     //feladat mentése
      onSave(){
      
       this.projectService.addTask(this.newTask, this.projectId).subscribe( t=>{this.project.tasks.unshift(t)});
 
       this.modalService.dismissAll();
     }
+    //modal bezárása
     close(){
       this.modalService.dismissAll();
       this.newTask = undefined;
     }
-    
+    //feladat törlése
     deleteTask(taskId: number){
       this.projectService.deleteTask(taskId, this.project.id).subscribe(
         t => {
@@ -75,14 +75,17 @@ export class ProjectAllTasksComponent implements OnInit {
           }
         });
     }
+    //törlés megerősítése
     confirmDelete(id: number) {
       if(confirm("Biztos hogy törlöd a feladatot?")) {
         this.deleteTask(id);
       }
     }
+    //taskhoz user rendelése
     dataChanged(){
       this.newTask.userName = this.selected.username;
       this.newTask.userId = this.selected.id;
       this.newTask.done = false;
     }
+    
   }

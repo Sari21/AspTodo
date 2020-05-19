@@ -39,11 +39,13 @@ export class ProjectComponent implements OnInit {
   failed = false;
   errorMessage = 'Nem sikerült hozzáadni a feladatot';
   
+  //új feladat hozzáasása
   addTask(content) {
      this.newTask = new Task();
      this.modalService.open(content);
  
    }
+   //új feladat mentése
    onSave(){
     this.newTask.userName = this.username;
     this.newTask.done = false;
@@ -52,12 +54,13 @@ export class ProjectComponent implements OnInit {
        (error) => {this.failed = true;});
    
   }
+  //modal bezárása
   close(){
     this.modalService.dismissAll();
     this.newTask = undefined;
     this.failed = false;
   }
-   
+   //feladat törlése
   deleteTask(taskId: number){
     this.projectService.deleteTask(taskId, this.project.id).subscribe(
       t => {
@@ -68,11 +71,13 @@ export class ProjectComponent implements OnInit {
         }
       });
   }
+  //törlés megerősítése
   confirmDelete(id: number) {
     if(confirm("Biztos hogy törlöd a feladatot?")) {
       this.deleteTask(id);
     }
   }
+  //feladat kipipálása
   setDone(id: number){
     this.projectService.updateTaskIsDone(this.project.id, id).subscribe(data => {
       this.project.tasks.find(t => t.id == id).done = true;

@@ -36,15 +36,16 @@ export class ProjectsComponent implements OnInit {
       this.projects = t;
   });
 }
+//új project hozzáadása
 addProject(content) {
  this.new = true;
- // this.selectedUser = {...this.originalUser};
   this.failed= false;
   this.newProject = new Project();
   this.modalService.open(content);
 }
-
+//új / szerkesztett projekt mentése
 onSave(){
+  //új
   if(this.new){
     this.projectService.addProject(this.newProject).subscribe( 
       (data)=>{this.projects.unshift(data);
@@ -58,6 +59,7 @@ onSave(){
       }
       );
   }
+  //szerkesztett
   if(this.edit){
   
     this.projectService.updateProject(this.newProject).subscribe( data => {
@@ -68,7 +70,7 @@ onSave(){
     }); 
   }
 }
-
+//modal bezárása
   close(){
   this.modalService.dismissAll();
   this.newProject = undefined;
@@ -78,7 +80,7 @@ onSave(){
   this.new = false;
   this.failed = false;
   }
-
+//project törlése
 deleteProject(id: number){
   this.projectService.deleteProject(id).subscribe(
     t => {
@@ -90,34 +92,39 @@ deleteProject(id: number){
     } 
   );
 }
+//törlés megerősítése
 confirmDelete(id: number, name: string) {
   if(confirm("Biztos hogy törlöt a "+ name + "projektet?")) {
     this.deleteProject(id);
   }
 }
+//project szerkesztése
 editProject(content, project : Project){
     this.edit = true;
     this.newProject = {...project};
      
      this.modalService.open(content);
 }
-
+//a szerkesztett adat módosítása a frontenden
    showUpdatedItem(newItem){
     let updateItem = this.projects.find(this.findIndexToUpdate, newItem.id);
     let index = this.projects.indexOf(updateItem);
     this.projects[index] = newItem;
 
   }
-
+//index meghatározása
   findIndexToUpdate(newItem) { 
         return newItem.id === this;
   }
+  //url készítése a project oldalhoz
   makeUrl(id: number){
     return "http://localhost:4200/project/".concat(id.toString());
   }
+  //url meghatározása a project-all-tasks oldalhoz
   makeUrlAll(id: number){
     return "http://localhost:4200/projectall/".concat(id.toString());
   }
+  //autentikáció ellenőrzése
   checkAuth() {
     this.authority = undefined;
     if (this.tokenStorage.getToken()) {
