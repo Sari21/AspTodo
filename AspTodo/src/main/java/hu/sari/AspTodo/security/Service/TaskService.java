@@ -76,7 +76,7 @@ public class TaskService {
        if(t.isPresent() && p.isPresent()){
        p.get().getTasks().remove(t.get());
        this.projectService.updateProject(p.get());
-       this.taskRepository.deleteById(taskId);
+       //this.taskRepository.deleteById(taskId);
        }
     }
     public void deleteTasksByUser(User user){

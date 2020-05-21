@@ -28,19 +28,7 @@ public class UserService {
     public Optional<User> getUserById(long id){
         return this.userRepository.findById(id);
     }
-   /* public User updateUser(User newUser)
-    {
-        Optional<User> oldUser = this.userRepository.findById(newUser.getId());
-        if(oldUser.isPresent()){
 
-        if(newUser.getPassword() == null){
-            newUser.setPassword(oldUser.get().getPassword());
-            newUser.setRoles(oldUser.get().getRoles());
-        }
-        return this.userRepository.save(newUser);
-        }
-        return null;
-    }*/
     public User updateUser(User newUser)
     {
         Optional<User> oldUser = this.userRepository.findById(newUser.getId());

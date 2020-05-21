@@ -9,6 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface ProjectRepository extends CrudRepository<Project, Long> {
-    public Iterable<Project> findAllByOrderByIdDesc();
-    public Optional<Project> findAllByName(String name);
+    Iterable<Project> findAllByOrderByIdDesc();
 }

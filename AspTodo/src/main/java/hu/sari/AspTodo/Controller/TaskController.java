@@ -6,6 +6,7 @@ import hu.sari.AspTodo.security.Service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,12 +21,12 @@ public class TaskController {
     public TaskController(TaskService taskService){
         this.taskService = taskService;
     }
-
+    @Secured("ROLE_USER")
     @GetMapping("username/{userName}")
     public List<ResponseTask> getTasksByUserName(@PathVariable("userName") String userName){
         return this.taskService.findAllTasksByUserName(userName);
     }
-
+    @Secured("ROLE_USER")
     @PostMapping("project/{projectId}")
     public ResponseEntity<ResponseTask> addNewTask(@RequestBody ResponseTask t, @PathVariable("projectId") long projectId){
         ResponseTask rT = this.taskService.addTask(t, projectId);
@@ -36,10 +37,12 @@ public class TaskController {
             return new ResponseEntity<ResponseTask>(rT, HttpStatus.CREATED);
         }
     }
+    @Secured("ROLE_USER")
     @DeleteMapping(path="{taskId}/project/{projectId}")
     public void deleteTaskById(@PathVariable("taskId") long taskId, @PathVariable("projectId") long projectId){
         this.taskService.deleteTaskById(taskId, projectId);
     }
+    @Secured("ROLE_USER")
     @PatchMapping(path = "project/{projectId}/task/{taskId}")
     public ResponseTask updateTaskIsDone(@PathVariable("projectId") long projectId, @PathVariable("taskId") long taskId ){
         return this.taskService.updateIsDone(projectId, taskId);

@@ -60,24 +60,15 @@ public class ProjectService {
         ArrayList<Task> delete = new ArrayList<>();
         for(Project p : this.projectRepository.findAll()){
 
-           /* Iterator<Task> i = p.getTasks().iterator();
-            while (i.hasNext()) {
-                Task s = i.next(); // must be called before you can call i.remove()
-                // Do something
-                i.remove();
-            }
-
-            */
             for(Task t : p.getTasks()){
                 if(t.getUser() == u){
                     delete.add(t);
-
                 }
             }
-                this.taskService.deleteAll(delete);
-                p.getTasks().removeAll(delete);
-                delete.clear();
-                this.updateProject(p);
+            this.taskService.deleteAll(delete);
+            p.getTasks().removeAll(delete);
+            delete.clear();
+            this.updateProject(p);
         }
     }
 

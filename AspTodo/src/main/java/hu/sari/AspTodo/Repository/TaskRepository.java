@@ -10,8 +10,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TaskRepository extends CrudRepository<Task, Long> {
     Iterable<Task> findAllByUserOrderByIdDesc(User u);
-    Iterable<Task> findAllByUser(User u);
-    void deleteAllByUser(User u);
-    //Iterable<Task> findAllByProject(Project p);
-    //Iterable<Task> findAllByUserAndProject(User u, Project p);
 }
